@@ -1,7 +1,31 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function login() {
+
+    const loginUser = async event => {
+        event.preventDefault()
+        const res = await fetch(
+            'api/auth/login',
+            {
+                body: JSON.stringify({
+                    email: event.target.email.value,
+                    pass: event.target.pass.value
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST'
+            }
+        )
+
+        const results = await res.json()
+        console.log(results)
+        toast(JSON.stringify(results.msg));
+    }
+
   return (
     <>
         <Head>
@@ -9,15 +33,15 @@ function login() {
         </Head>
             <h1>Login</h1>
             <div>
-                  <form className="p-5 mx-auto" style={{maxWidth:'500px'}}>
+              <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={loginUser}>
                       <div className="mb-3">
-                          <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
+                        <label htmlFor="email" className="form-label">Email address</label>
+                          <input type="email" className="form-control" id="email" aria-describedby="emailHelp" required/>
                               <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                       </div>
                       <div className="mb-3">
-                          <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" required/>
+                        <label htmlFor="pass" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="pass" required/>
                       </div>
                       <div className="mb-3 form-check">
                           <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
@@ -31,6 +55,7 @@ function login() {
                                     <a> Register</a>
                                 </Link>
                             </p>
+                            <ToastContainer/>
                         </div>
                     </div>
                   </form>
