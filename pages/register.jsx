@@ -1,18 +1,22 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
+//import { useRouter } from 'next/router'
 import 'react-toastify/dist/ReactToastify.css';
 
 
 function register() {
 
+    //const router = useRouter()
+
     const registerUser = async event => {
         event.preventDefault()
-
+        //console.log(event)
         const res = await fetch(
             'api/auth/register',
             {
                 body: JSON.stringify({
+                    username: event.target.username.value,
                     name: event.target.name.value,
                     email: event.target.email.value,
                     phone: event.target.phone.value,
@@ -30,6 +34,10 @@ function register() {
 
         const results = await res.json()
         toast(JSON.stringify(results.msg));
+        //console.log(results.msg);
+        //setTimeout(() => {
+        //    router.push('/login')
+        //}, 3000)
     }
 
     return (
@@ -42,13 +50,17 @@ function register() {
                     <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={registerUser}>
                         {/* Inputs */}
                         <div className="mb-3">
+                            <label htmlFor="username" className="form-label">Username</label>
+                            <input type="text" className="form-control" id="username" required/>
+                        </div>
+                        <div className="mb-3">
                             <label htmlFor="name" className="form-label">Full Name</label>
                             <input type="text" className="form-control" id="name" required/>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>
                             <input type="email" className="form-control" id="email" aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                            <div id="emailHelp" className="form-text">We will never share your email with anyone else.</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="phone" className="form-label">Phone Number</label>
