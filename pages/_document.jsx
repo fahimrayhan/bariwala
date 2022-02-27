@@ -5,6 +5,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
+                    <meta charSet="utf-8" />
                     <meta name="description" content="Bariwala - A Complete Tools to manage your properties" />
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"></link>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
