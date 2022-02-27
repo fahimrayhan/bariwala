@@ -34,16 +34,16 @@ function Add_apartment() {
                             <input type="text" className="form-control" id="area" placeholder="Area (sqft)" />
                         </div>
                         <div className="mb-3">
-                            <input type="text" className="form-control" id="room" placeholder="Number of Bed Room"  />
+                            <input type="text" className="form-control" id="room" placeholder="Number of Bed Room" required/>
                         </div>
                         <div className="mb-3">
-                            <input type="text" className="form-control" id="bath" placeholder="Number of Bath"  />
+                            <input type="text" className="form-control" id="bath" placeholder="Number of Bath" required />
                         </div>
                         <div className="mb-3">
-                            <input type="text" className="form-control" id="floor" placeholder="N-th Floor"  />
+                            <input type="text" className="form-control" id="floor" placeholder="N-th Floor" required/>
                         </div>
                         <div className="mb-3">
-                            <input type="text" className="form-control" id="rent" placeholder="Rent per month"  />
+                            <input type="text" className="form-control" id="rent" placeholder="Rent per month" required/>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description " className="form-label">Description: </label>
