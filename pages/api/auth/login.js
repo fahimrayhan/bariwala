@@ -5,6 +5,7 @@ import valid from "../../../utils/validate"
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
+import cookie from 'cookie'
 
 
 export default async function handler(req, res) {
@@ -43,9 +44,24 @@ export default async function handler(req, res) {
                         expiresIn: '1h'
                     })
 
+                    // Generating Cookies
+                    const serialize = cookie.serialize('authToken',token,{
+                        httpOnly: true,
+                        secure: true,
+                        sameSite:"strict",
+                        maxAge: 60*60,
+                        path: '/'
+                    })
+
+                    //Storing Cookies
+                    res.setHeader('Set-Cookie',serialize)
+
+                    // Redirect
+                    // res.status(200).redirect("http://localhost:3000/admin/")
+
                     // Token Gen Successfull
-                    res.json({
-                        "access-token":token,
+                    res.status(200).json({
+                        "access-token": token,
                         "msg": "Login Successfull"
                     })
                 }
