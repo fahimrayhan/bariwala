@@ -5,23 +5,13 @@ import 'dotenv/config'
 
 export const db = mysql({
     config:{
-
-        host: process.env.HOST,
-        port: process.env.PORT,
-        database: process.env.DB,
-        user: process.env.USERNAME,
-        password: process.env.PASSWORD
-        
-
         host: "localhost",
         port: 3306,
         database: "bariwala",
         user: "bariwalaTest",
         password: "bariwalaTest"
-
     }
 })
-
 
 export async function sql_query(query,values=[]) {
     try {

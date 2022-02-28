@@ -23,11 +23,6 @@ export default async function handler(req, res) {
         else{
             res.status(401).json({ msg:"Regestration Faild, Please Try Again"})
         }
-
-        else{
-            res.json({ msg: "Regestration Faild, Please Try Again" })
-        }
-
     }
     else{
         res.json({ msg: isValid });
