@@ -46,7 +46,7 @@ function login() {
                       <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
                           <input type="email" className="form-control" id="email" aria-describedby="emailHelp" required/>
-                              <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                              <div id="emailHelp" className="form-text">We will never share your email with anyone else.</div>
                       </div>
                       <div className="mb-3">
                         <label htmlFor="pass" className="form-label">Password</label>

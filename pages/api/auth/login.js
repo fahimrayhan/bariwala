@@ -24,19 +24,22 @@ export default async function handler(req, res) {
         try {
             // Checking user exist or not
             const results = await sql_query(
-                `SELECT * FROM users WHERE u_mail ="${email}" `
+                `SELECT * FROM Users WHERE email ="${email}" `
+            )
+            const results_2 = await sql_query(
+                `SELECT * FROM Roles WHERE user_id = (SELECT user_id FROM Users WHERE email ="${email}")`
             )
             // If User exists
             if (results && results.length > 0) {
 
                 // Checking password matched or not
-                const isValidPass = await bcrypt.compare(pass, results[0].u_pass)
+                const isValidPass = await bcrypt.compare(pass, results[0].password)
 
                 if (isValidPass) {
                     // Token Generation
                     const token = jwt.sign({
-                        username: results[0].u_name,
-                        role: results[0].role_id
+                        username: results[0].user_id,
+                        role: results_2[0].role_id
                     }, process.env.JWT_SEC, {
                         expiresIn: '1h'
                     })
