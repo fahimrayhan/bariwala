@@ -1,12 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function login() {
-
-    const router = useRouter()
 
     const loginUser = async event => {
         event.preventDefault()
@@ -23,16 +20,10 @@ function login() {
                 method: 'POST'
             }
         )
-        
+
         const results = await res.json()
         console.log(results)
         toast(JSON.stringify(results.msg));
-        console.log(res.status)
-        setTimeout(() => {
-            if (res.status == 200) {
-                router.push("/admin/")
-            }
-        }, 3000);
     }
 
   return (

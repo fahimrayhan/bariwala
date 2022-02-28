@@ -1,9 +1,8 @@
-import React from 'react'
 
 function index() {
   return (
     <div>
-        <h1>Blogs</h1>
+      <h1>Hello, world!</h1>
     </div>
   )
 }
