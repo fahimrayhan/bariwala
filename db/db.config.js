@@ -9,8 +9,10 @@ export const db = mysql({
         database: process.env.DB,
         user: process.env.USERNAME,
         password: process.env.PASSWORD
+        
     }
 })
+
 
 export async function sql_query(query,values=[]) {
     try {
