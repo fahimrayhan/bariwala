@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 function NavBar() {
   return (
+
         <nav className="navbar navbar-expand-md navbar-light bg-light nav-fill">
               <div className="container-fluid">
                   <Link href="/"><a className="navbar-brand">Bariwala</a></Link>

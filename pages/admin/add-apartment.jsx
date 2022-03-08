@@ -1,4 +1,3 @@
-
 import Head from 'next/head'
 import AuthLayout from '../../components/AuthLayout'
 import { ToastContainer, toast } from 'react-toastify';

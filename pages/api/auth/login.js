@@ -42,16 +42,16 @@ export default async function handler(req, res) {
                     })
 
                     // Generating Cookies
-                    const serialize = cookie.serialize('authToken',token,{
+                    const serialize = cookie.serialize('authToken', token, {
                         httpOnly: true,
                         secure: true,
-                        sameSite:"strict",
-                        maxAge: 60*60,
+                        sameSite: "strict",
+                        maxAge: 60 * 60,
                         path: '/'
                     })
 
                     //Storing Cookies
-                    res.setHeader('Set-Cookie',serialize)
+                    res.setHeader('Set-Cookie', serialize)
 
                     // Redirect
                     // res.status(200).redirect("http://localhost:3000/admin/")
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
         } catch (error) {
             res.json({ msg: "Error!" })
         }
-        
+
     }
     // if not valid email/pass then error
     else {
