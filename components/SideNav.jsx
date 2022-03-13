@@ -1,9 +1,8 @@
 import Link from "next/link"
+import Style from '../styles/Nav.module.css'
 function SideNav() {
   return (
-      
-      <div className="bg-primary">
-            <nav className="d-flex flex-column flex-shrink-0 p-3 bg-light" style={{ maxWidth:"220px"}}>
+            <nav>
                   <ul className="nav nav-pills flex-column mb-auto">
                       <li className="nav-item">
                           <Link href="/"><a>Home</a></Link>
@@ -16,8 +15,6 @@ function SideNav() {
                       </li>
                   </ul>
               </nav>
-        </div>
-
   )
 }
 
