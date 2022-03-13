@@ -23,7 +23,7 @@ function login() {
                 method: 'POST'
             }
         )
-        
+
         const results = await res.json()
         console.log(results)
         toast(JSON.stringify(results.msg));
@@ -35,42 +35,42 @@ function login() {
         }, 3000);
     }
 
-  return (
-    <>
-        <Head>
-            <title>Login | Bariwala</title>
-        </Head>
+    return (
+        <>
+            <Head>
+                <title>Login | Bariwala</title>
+            </Head>
             <h1>Login</h1>
             <div>
-              <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={loginUser}>
-                      <div className="mb-3">
+                <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={loginUser}>
+                    <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
-                          <input type="email" className="form-control" id="email" aria-describedby="emailHelp" required/>
-                              <div id="emailHelp" className="form-text">We will never share your email with anyone else.</div>
-                      </div>
-                      <div className="mb-3">
+                        <input type="email" className="form-control" id="email" aria-describedby="emailHelp" required />
+                        <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div className="mb-3">
                         <label htmlFor="pass" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="pass" required/>
-                      </div>
-                      <div className="mb-3 form-check">
-                          <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                          <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                      </div>
+                        <input type="password" className="form-control" id="pass" required />
+                    </div>
+                    <div className="mb-3 form-check">
+                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                    </div>
                     <div className="text-center">
                         <button type="submit" className="btn btn-primary text-center">Submit</button>
                         <div className="mt-2">
-                            <p>Don't have an account? 
+                            <p>Don't have an account?
                                 <Link href="/register">
                                     <a> Register</a>
                                 </Link>
                             </p>
-                            <ToastContainer/>
+                            <ToastContainer />
                         </div>
                     </div>
-                  </form>
+                </form>
             </div>
-    </>
-  )
+        </>
+    )
 }
 
 export default login
