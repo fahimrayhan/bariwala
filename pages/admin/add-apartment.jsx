@@ -86,9 +86,8 @@ export default addapartment
 
 addapartment.getLayout = function getLayout(page) {
   return(
-    <>
-      <AuthLayout/>
+    <AuthLayout>
       {page}
-    </>
+    </AuthLayout>
   )
 }

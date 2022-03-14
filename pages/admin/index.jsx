@@ -76,9 +76,8 @@ export async function getServerSideProps() {
 
 index.getLayout = function getLayout(page) {
   return(
-    <div>
-      <AuthLayout />
-      {page}
-    </div>
+      <AuthLayout>
+        {page}
+      </AuthLayout>
   )
 }
