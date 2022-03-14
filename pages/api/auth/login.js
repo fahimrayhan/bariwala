@@ -5,6 +5,10 @@ import valid from "../../../utils/validate"
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
+<<<<<<< HEAD
+=======
+import cookie from 'cookie'
+>>>>>>> 95a3151e42d7763dfdd3dab39b0fb94903953383
 
 
 export default async function handler(req, res) {
@@ -43,9 +47,30 @@ export default async function handler(req, res) {
                         expiresIn: '1h'
                     })
 
+<<<<<<< HEAD
                     // Token Gen Successfull
                     res.json({
                         "access-token":token,
+=======
+                    // Generating Cookies
+                    const serialize = cookie.serialize('authToken', token, {
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: "strict",
+                        maxAge: 60 * 60,
+                        path: '/'
+                    })
+
+                    //Storing Cookies
+                    res.setHeader('Set-Cookie', serialize)
+
+                    // Redirect
+                    // res.status(200).redirect("http://localhost:3000/admin/")
+
+                    // Token Gen Successfull
+                    res.status(200).json({
+                        "access-token": token,
+>>>>>>> 95a3151e42d7763dfdd3dab39b0fb94903953383
                         "msg": "Login Successfull"
                     })
                 }
@@ -65,7 +90,11 @@ export default async function handler(req, res) {
         } catch (error) {
             res.json({ msg: "Error!" })
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 95a3151e42d7763dfdd3dab39b0fb94903953383
     }
     // if not valid email/pass then error
     else {

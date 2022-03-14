@@ -3,4 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  env:{
+    JWT_SEC: process.env.JWT_SEC
+  }
+}

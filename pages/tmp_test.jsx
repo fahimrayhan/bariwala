@@ -49,10 +49,6 @@ function TmpTest() {
                             <label htmlFor="tmp_body" className="form-label">Tmp Body</label>
                             <textarea className="form-control" id="tmp_body" required/>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="tmp_body" className="form-label">Tmp text area</label>
-                            <textarea className="form-control" id="tmp_body" required/>
-                        </div>
                         {/* Inputs Ends*/}
                         {/* Submit Buttons & Links */}
                         <div className="text-center">
