@@ -13,6 +13,9 @@ function SideNav() {
                       <li className="nav-item">
                           <Link href="/admin/add-apartment"><a>Add Apartment</a></Link>
                       </li>
+                      <li className="nav-item">
+                          <Link href="/"><a>Log Out</a></Link>
+                      </li>
                   </ul>
               </nav>
   )
