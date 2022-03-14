@@ -1,18 +1,22 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
+//import { useRouter } from 'next/router'
 import 'react-toastify/dist/ReactToastify.css';
 
 
 function register() {
 
+    //const router = useRouter()
+
     const registerUser = async event => {
         event.preventDefault()
-
+        //console.log(event)
         const res = await fetch(
             'api/auth/register',
             {
                 body: JSON.stringify({
+                    username: event.target.username.value,
                     name: event.target.name.value,
                     email: event.target.email.value,
                     phone: event.target.phone.value,
@@ -30,6 +34,10 @@ function register() {
 
         const results = await res.json()
         toast(JSON.stringify(results.msg));
+        //console.log(results.msg);
+        //setTimeout(() => {
+        //    router.push('/login')
+        //}, 3000)
     }
 
     return (

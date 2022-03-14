@@ -45,7 +45,8 @@ function NavBar() {
                       </ul>
                   </div>
               </div>
-          </nav>
+        </nav>
+       
   )
 }
 
