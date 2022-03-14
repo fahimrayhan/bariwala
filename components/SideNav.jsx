@@ -16,6 +16,9 @@ function SideNav() {
                       <li className="nav-item">
                           <Link href="/"><a>Log Out</a></Link>
                       </li>
+                      <li className="nav-item">
+                          <Link href="/"><a>Contact Us</a></Link>
+                      </li>
                   </ul>
               </nav>
   )
