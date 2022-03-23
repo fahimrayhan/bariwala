@@ -6,7 +6,7 @@ const AuthLayout = ({children}) => {
             <div className={Style.sideNav}>
                 <SideNav />
             </div>
-            <div className="p-4">
+            <div className="p-2">
                 {children}
             </div>
         </div>

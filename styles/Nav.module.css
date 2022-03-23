@@ -14,16 +14,49 @@
 } */
 
 .authLayout {
+    height: 100vh;
     display: grid;
     grid-template-columns: 20% 80%;
 }
 
 .sideNav{
-
-    height: 100%;
+    
     top: 0;
     bottom: 0;
-    background: #408080;
+    background-color: #202020;
     max-width: 250px;
     padding: 20px;
+    color: #fff;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.profile .username{
+    margin:5px 0 5px 0;
+}
+
+.profile .descriptions {
+    text-align: center;
+}
+
+.navBar li{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    background-color: #454651;
+}
+
+.navBar li:hover{
+    cursor: pointer;
+    background-color: #858696;
 }

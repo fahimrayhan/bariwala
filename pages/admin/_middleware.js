@@ -6,6 +6,7 @@ export default function middleware(req) {
     const cookie = req.cookies["authToken"]
     // console.log(process.env.JWT_SEC)
     if (cookie) {
+        // console.log(cookie)
         const verify = jwt.verify(cookie,process.env.JWT_SEC)
         if (verify) {
             return NextResponse.next()

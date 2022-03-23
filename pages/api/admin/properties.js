@@ -15,4 +15,5 @@ export default async function (req, res) {
         } catch (error) {
             res.json({err:error.message})
         }
+       
 }

@@ -8,6 +8,8 @@ import 'dotenv/config'
 import cookie from 'cookie'
 
 
+
+
 export default async function handler(req, res) {
 
     // Getting email and pass from body
@@ -15,6 +17,7 @@ export default async function handler(req, res) {
         email,
         pass
     } = req.body;
+    
 
     // Checking validity of email and pass
     const isValid = valid(email, email, pass, pass);
@@ -24,22 +27,26 @@ export default async function handler(req, res) {
         try {
             // Checking user exist or not
             const results = await sql_query(
-                `SELECT * FROM users WHERE u_mail ="${email}" `
+                `SELECT * FROM users WHERE email ="${email}" `
             )
             // If User exists
             if (results && results.length > 0) {
 
                 // Checking password matched or not
-                const isValidPass = await bcrypt.compare(pass, results[0].u_pass)
+                const isValidPass = await bcrypt.compare(pass, results[0].password)
+
 
                 if (isValidPass) {
                     // Token Generation
                     const token = jwt.sign({
-                        username: results[0].u_name,
-                        role: results[0].role_id
+                        id: results[0].user_id,
+                        username: results[0].user_name,
+                        role: results[0].role_id,
+                        parent: results[0].parent_id
                     }, process.env.JWT_SEC, {
                         expiresIn: '1h'
                     })
+
 
                     // Generating Cookies
                     const serialize = cookie.serialize('authToken', token, {
@@ -52,6 +59,7 @@ export default async function handler(req, res) {
 
                     //Storing Cookies
                     res.setHeader('Set-Cookie', serialize)
+
 
                     // Redirect
                     // res.status(200).redirect("http://localhost:3000/admin/")
@@ -76,7 +84,7 @@ export default async function handler(req, res) {
                 })
             }
         } catch (error) {
-            res.json({ msg: "Error!" })
+            res.json({ msg: error.message })
         }
 
     }

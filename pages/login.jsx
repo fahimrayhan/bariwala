@@ -25,9 +25,7 @@ function login() {
         )
 
         const results = await res.json()
-        console.log(results)
         toast(JSON.stringify(results.msg));
-        console.log(res.status)
         setTimeout(() => {
             if (res.status == 200) {
                 router.push("/admin/")
