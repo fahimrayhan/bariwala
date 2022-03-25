@@ -17,9 +17,9 @@ function SideNav() {
         toast(JSON.stringify(results.msg));
         setTimeout(() => {
             if (res.status === 200) {
-                router.push("/about")
+                router.push('/')
             }
-        }, 3000);
+        }, 2000);
         
     } 
 
@@ -40,7 +40,7 @@ function SideNav() {
                         <Link href="/"><a>Home</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/admin/dashboard"><a>Dashboard</a></Link>
+                        <Link href="/admin"><a>Dashboard</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/admin/add-building"><a>Add Building</a></Link>

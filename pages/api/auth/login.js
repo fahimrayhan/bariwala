@@ -47,6 +47,7 @@ export default async function handler(req, res) {
                         expiresIn: '1h'
                     })
 
+                   
 
                     // Generating Cookies
                     const serialize = cookie.serialize('authToken', token, {
@@ -56,6 +57,7 @@ export default async function handler(req, res) {
                         maxAge: 60 * 60,
                         path: '/'
                     })
+
 
                     //Storing Cookies
                     res.setHeader('Set-Cookie', serialize)

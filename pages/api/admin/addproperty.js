@@ -6,7 +6,8 @@ import {sql_query} from '../../../db/db.config'
 export default async function (req, res) {
 
     // Getting values from body
-    const {title,beds,desc,area,bath,month,floor,rent,type,pid,uid} = req.body
+    const {title,beds,desc,area,bath,month,floor,rent,type,pid} = req.body
+    
     const date = new Date().toLocaleDateString()
     // Getting cookies
     const token = req.cookies["authToken"]
@@ -29,7 +30,7 @@ export default async function (req, res) {
 
                 // NEW DB CODE
                 `INSERT INTO apartments(title, beds, rent_per_month, type, area, baths, date, description, from_month, nth_floor, property_id, user_id) 
-                VALUES("${title}","${beds}","${rent}","${type}","${area}", "${bath}","${date}","${desc}","${month}","${floor}", "${pid}","${uid}")`
+                VALUES("${title}","${beds}","${rent}","${type}","${area}", "${bath}","${date}","${desc}","${month}","${floor}", "${pid}","${verify.user_id}")`
             )
             console.log(results)
             if (results) {

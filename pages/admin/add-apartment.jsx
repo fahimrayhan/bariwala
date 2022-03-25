@@ -95,7 +95,7 @@ function addapartment() {
           </select>
           {
             BD && 
-            <select id="type" className="form-select mb-3" aria-label="Default select example" >
+            <select id="pid" className="form-select mb-3" aria-label="Default select example" >
               <option defaultValue="Property Type">Select Building</option>
                {
                  BD.map((item,key) =>{
@@ -106,6 +106,10 @@ function addapartment() {
                }
             </select>
           }
+          <div className="mb-3">
+            <label htmlFor="area" className="form-label">Square Feet?</label>
+            <input type="number" className="form-control" id="area" required placeholder="1750" />
+          </div>
           <div className="text-center mt-4">
             <button type="submit" className="btn btn-primary text-center">Submit</button>
           </div>

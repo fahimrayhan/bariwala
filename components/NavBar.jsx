@@ -1,6 +1,45 @@
 import Link from 'next/link'
 
-function NavBar() {
+
+
+
+function NavBar(cookie) {
+
+
+
+    const isLoggedIn = () =>{
+  
+        console.log(cookie.data.cookie)
+
+        if (cookie.data.cookie) {
+            return(
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <img className="img-thumbnail" style={{ maxWidth: '40px', height: '40px', borderRadius: '50%' }} src="./img_avatar.png" alt="" />
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/admin">
+                            <a className="nav-link"> Dashboard</a>
+                        </Link>
+                    </li>
+                </ul>
+            )
+        }
+        else{
+            return(
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link href="/login">
+                            <a className="nav-link">Login</a>
+                        </Link>
+                    </li>
+                </ul>
+            )
+        }
+    }
+    
+    
+
   return (
 
         <nav className="navbar navbar-expand-md navbar-light bg-light nav-fill">
@@ -36,13 +75,9 @@ function NavBar() {
                       </ul>
                   </div>
                   <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-                      <ul className="navbar-nav">
-                          <li className="nav-item">
-                                <Link href="/login">
-                                    <a className="nav-link">Login</a>
-                                </Link>
-                          </li>
-                      </ul>
+                      {
+                        isLoggedIn()
+                      }
                   </div>
               </div>
           </nav>

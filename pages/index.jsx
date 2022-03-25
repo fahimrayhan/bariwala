@@ -34,7 +34,7 @@ function index({data}) {
                       </div>
                     </div>
                     <div className="text-center">
-                      <a href="#" className="btn btn-primary">View Details</a>
+                      <a href={`/properties/${value.apartment_id}`} className="btn btn-primary">View Details</a>
                     </div>
                   </div>
               </div>
@@ -50,7 +50,7 @@ export default index
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:3000/api/admin/properties`)
+  const res = await fetch(`http://localhost:3000/api/properties`)
   const data = await res.json()
 
   // Pass data to the page via props
