@@ -1,9 +1,27 @@
 import Head from 'next/head'
+import {useEffect,useState} from 'react'
 import AuthLayout from '../../components/AuthLayout'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 function addapartment() {
 
+  let buildings = []
+
+  const [BD, setBD] = useState([])
+
+    useEffect(() => {
+
+         fetch('http://localhost:3000/api/admin/buildings').then((response) => {
+          response.json().then(data => {
+            setBD(data)
+            buildings = [...data]
+          })
+        })
+    }, [])
+    
+  
+  
   const handleSubmit = async(event) => {
       event.preventDefault()
       const res = await fetch(
@@ -18,6 +36,8 @@ function addapartment() {
             floor: event.target.floor.value,
             rent: event.target.rent.value,
             type: event.target.type.value,
+            area: event.target.area.value,
+            pid: event.target.pid.value,
           }),
           headers: {
             'Content-Type': 'application/json'
@@ -26,7 +46,7 @@ function addapartment() {
         }
       )
       const results = await res.json()
-      console.log(results)
+      // console.log(results)
       toast(JSON.stringify(results.msg));
   }
 
@@ -35,7 +55,7 @@ function addapartment() {
       <Head>
         <title>Add a new apartment</title>
       </Head>
-        <h1>Add Apartment</h1>
+      <h1>Add Apartment</h1>
       <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={handleSubmit}>
           <div className="mb-3">
               <label htmlFor="title" className="form-label">Title</label>
@@ -65,7 +85,7 @@ function addapartment() {
             <label htmlFor="rent" className="form-label">Rent Per Month</label>
             <input type="number" className="form-control" id="rent" required placeholder="BDT . tk" />
           </div>
-          <select id="type" className="form-select" aria-label="Default select example">
+          <select id="type" className="form-select mb-3" aria-label="Default select example">
             <option defaultValue="Property Type">Property Type</option>
             <option value="Studio">Studio</option>
             <option value="Micro Apartment">Micro Apartment</option>
@@ -73,6 +93,23 @@ function addapartment() {
             <option value="Duplex">Duplex</option>
             <option value="High-rise3">High-rise</option>
           </select>
+          {
+            BD && 
+            <select id="pid" className="form-select mb-3" aria-label="Default select example" >
+              <option defaultValue="Property Type">Select Building</option>
+               {
+                 BD.map((item,key) =>{
+                   return(
+                     <option key={key} value={item.property_id}>{item.building_name}</option>
+                   )
+                 })
+               }
+            </select>
+          }
+          <div className="mb-3">
+            <label htmlFor="area" className="form-label">Square Feet?</label>
+            <input type="number" className="form-control" id="area" required placeholder="1750" />
+          </div>
           <div className="text-center mt-4">
             <button type="submit" className="btn btn-primary text-center">Submit</button>
           </div>
@@ -86,9 +123,8 @@ export default addapartment
 
 addapartment.getLayout = function getLayout(page) {
   return(
-    <>
-      <AuthLayout/>
+    <AuthLayout>
       {page}
-    </>
+    </AuthLayout>
   )
 }

@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
-//import { useRouter } from 'next/router'
+import {useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 
 
 function register() {
 
-    //const router = useRouter()
+    const [username,setUsername] = useState("")
 
     const registerUser = async event => {
         event.preventDefault()
@@ -18,6 +18,7 @@ function register() {
                 body: JSON.stringify({
                     username: event.target.username.value,
                     name: event.target.name.value,
+                    username: event.target.username.value,
                     email: event.target.email.value,
                     phone: event.target.phone.value,
                     birthdate: event.target.b_date.value,
@@ -51,7 +52,16 @@ function register() {
                     {/* Inputs */}
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Full Name</label>
-                        <input type="text" className="form-control" id="name" required />
+                        <input type="text" className="form-control" id="name" required
+                            onChange={(event) =>{
+                                const name = event.target.value.toLowerCase().replace(' ','-')
+                                setUsername(name);
+                            }}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="username" className="form-label">User Name</label>
+                        <input type="text" className="form-control" id="username" required placeholder="username" value={username} disabled/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>

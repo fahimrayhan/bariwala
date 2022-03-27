@@ -8,6 +8,8 @@ import 'dotenv/config'
 import cookie from 'cookie'
 
 
+
+
 export default async function handler(req, res) {
 
     // Getting email and pass from body
@@ -15,6 +17,7 @@ export default async function handler(req, res) {
         email,
         pass
     } = req.body;
+    
 
     // Checking validity of email and pass
     const isValid = valid(email, email, pass, pass);
@@ -24,25 +27,42 @@ export default async function handler(req, res) {
         try {
             // Checking user exist or not
             const results = await sql_query(
+<<<<<<< HEAD
                 `SELECT * FROM Users WHERE email ="${email}" `
             )
             const results_2 = await sql_query(
                 `SELECT * FROM Roles WHERE user_id = (SELECT user_id FROM Users WHERE email ="${email}")`
+=======
+                `SELECT * FROM users WHERE email ="${email}" `
+>>>>>>> fahim
             )
             // If User exists
             if (results && results.length > 0) {
 
                 // Checking password matched or not
                 const isValidPass = await bcrypt.compare(pass, results[0].password)
+<<<<<<< HEAD
+=======
+
+>>>>>>> fahim
 
                 if (isValidPass) {
                     // Token Generation
                     const token = jwt.sign({
+<<<<<<< HEAD
                         username: results[0].user_id,
                         role: results_2[0].role_id
+=======
+                        id: results[0].user_id,
+                        username: results[0].user_name,
+                        role: results[0].role_id,
+                        parent: results[0].parent_id
+>>>>>>> fahim
                     }, process.env.JWT_SEC, {
                         expiresIn: '1h'
                     })
+
+                   
 
                     // Generating Cookies
                     const serialize = cookie.serialize('authToken', token, {
@@ -53,8 +73,10 @@ export default async function handler(req, res) {
                         path: '/'
                     })
 
+
                     //Storing Cookies
                     res.setHeader('Set-Cookie', serialize)
+
 
                     // Redirect
                     // res.status(200).redirect("http://localhost:3000/admin/")
@@ -79,7 +101,7 @@ export default async function handler(req, res) {
                 })
             }
         } catch (error) {
-            res.json({ msg: "Error!" })
+            res.json({ msg: error.message })
         }
 
     }
