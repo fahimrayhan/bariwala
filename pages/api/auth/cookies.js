@@ -8,6 +8,7 @@ export default async function (req, res) {
     if (!token) {
         res.status(404).json({ msg:"Not Found"})
     }
+   
     else{
         const verify = jwt.verify(token, process.env.JWT_SEC);
         if (!verify) {

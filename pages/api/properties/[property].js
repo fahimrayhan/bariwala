@@ -49,7 +49,9 @@ export default async function (req, res) {
         // res.status(200).json({ msg: "Success" })
         try {
             const results = await sql_query(
-                `SELECT apartment_id, beds, description, rent_per_month, type, title, baths, area, date, from_month, nth_floor, property_id, user_id FROM apartments WHERE apartment_id = '${property}'`
+                `SELECT apartment_id, beds, description, rent_per_month, type, title, baths, area, date, from_month, nth_floor, property_id, users.email, users.phone_number, users.full_name 
+                FROM apartments NATURAL JOIN users
+                WHERE apartments.apartment_id = '${property}'`
             )
             if (results) {
                 // console.log(results)
