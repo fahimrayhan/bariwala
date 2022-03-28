@@ -5,10 +5,7 @@ import valid from "../../../utils/validate"
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
-<<<<<<< HEAD
-=======
 import cookie from 'cookie'
->>>>>>> 95a3151e42d7763dfdd3dab39b0fb94903953383
 
 
 export default async function handler(req, res) {
@@ -30,7 +27,7 @@ export default async function handler(req, res) {
                 `SELECT * FROM Users WHERE email ="${email}" `
             )
             const results_2 = await sql_query(
-                `SELECT * FROM Roles WHERE user_id = (SELECT user_id FROM Users WHERE email ="${email}")`
+                `SELECT * FROM Roles WHERE role_id = (SELECT role_id FROM Users WHERE email ="${email}")`
             )
             // If User exists
             if (results && results.length > 0) {
@@ -43,15 +40,10 @@ export default async function handler(req, res) {
                     const token = jwt.sign({
                         username: results[0].user_id,
                         role: results_2[0].role_id
-                    }, process.env.JWT_SEC, {
+                    }, "OFFENSIVESECURITY", {
                         expiresIn: '1h'
                     })
 
-<<<<<<< HEAD
-                    // Token Gen Successfull
-                    res.json({
-                        "access-token":token,
-=======
                     // Generating Cookies
                     const serialize = cookie.serialize('authToken', token, {
                         httpOnly: true,
@@ -70,7 +62,6 @@ export default async function handler(req, res) {
                     // Token Gen Successfull
                     res.status(200).json({
                         "access-token": token,
->>>>>>> 95a3151e42d7763dfdd3dab39b0fb94903953383
                         "msg": "Login Successfull"
                     })
                 }
@@ -90,11 +81,6 @@ export default async function handler(req, res) {
         } catch (error) {
             res.json({ msg: "Error!" })
         }
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> 95a3151e42d7763dfdd3dab39b0fb94903953383
     }
     // if not valid email/pass then error
     else {

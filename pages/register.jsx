@@ -50,6 +50,10 @@ function register() {
                 <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={registerUser}>
                     {/* Inputs */}
                     <div className="mb-3">
+                        <label htmlFor="username" className="form-label">Username</label>
+                        <input type="text" className="form-control" id="username" required />
+                    </div>
+                    <div className="mb-3">
                         <label htmlFor="name" className="form-label">Full Name</label>
                         <input type="text" className="form-control" id="name" required />
                     </div>
