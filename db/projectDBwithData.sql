@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `apartments` (
-  `apartment_id` int(11) NOT NULL,
+  `apartment_id` int(11) AUTO_INCREMENT NOT NULL,
   `beds` int(11) NOT NULL,
   `status` tinyint(1) DEFAULT 0,
   `description` text NOT NULL,
@@ -58,7 +58,7 @@ INSERT INTO `apartments` (`apartment_id`, `beds`, `status`, `description`, `rent
 --
 
 CREATE TABLE `apartment_img` (
-  `img_id` int(11) NOT NULL,
+  `img_id` int(11) AUTO_INCREMENT NOT NULL,
   `apartment_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -69,7 +69,7 @@ CREATE TABLE `apartment_img` (
 --
 
 CREATE TABLE `blogs` (
-  `blog_id` int(11) NOT NULL,
+  `blog_id` int(11) AUTO_INCREMENT NOT NULL,
   `blog_title` varchar(50) NOT NULL,
   `blog_description` text NOT NULL,
   `date` varchar(20) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE `blog_img` (
 --
 
 CREATE TABLE `buildings` (
-  `property_id` int(11) NOT NULL,
+  `property_id` int(11) AUTO_INCREMENT NOT NULL,
   `building_name` varchar(50) NOT NULL,
   `garage` tinyint(1) DEFAULT 0,
   `lift` tinyint(1) DEFAULT 0,
@@ -123,7 +123,7 @@ INSERT INTO `buildings` (`property_id`, `building_name`, `garage`, `lift`, `city
 --
 
 CREATE TABLE `images` (
-  `img_id` int(11) NOT NULL,
+  `img_id` int(11) AUTO_INCREMENT NOT NULL,
   `img_url` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -135,7 +135,7 @@ CREATE TABLE `images` (
 
 CREATE TABLE `pages` (
   `content` text NOT NULL,
-  `page_id` int(11) NOT NULL,
+  `page_id` int(11) AUTO_INCREMENT NOT NULL,
   `page_title` varchar(100) NOT NULL,
   `meta_info` text DEFAULT NULL,
   `isPublished` tinyint(1) DEFAULT 0
@@ -159,7 +159,7 @@ CREATE TABLE `page_img` (
 --
 
 CREATE TABLE `payments` (
-  `payment_id` int(11) NOT NULL,
+  `payment_id` int(11) AUTO_INCREMENT NOT NULL,
   `amount` decimal(8,2) NOT NULL,
   `date` varchar(20) NOT NULL,
   `status` tinyint(1) DEFAULT 0,
@@ -176,7 +176,7 @@ CREATE TABLE `payments` (
 --
 
 CREATE TABLE `permissions` (
-  `permissions_id` int(11) NOT NULL,
+  `permissions_id` int(11) AUTO_INCREMENT NOT NULL,
   `permissions_type` varchar(30) NOT NULL,
   `scripts` varchar(256) DEFAULT NULL,
   `role_id` int(11) NOT NULL
@@ -189,7 +189,7 @@ CREATE TABLE `permissions` (
 --
 
 CREATE TABLE `roles` (
-  `role_id` int(11) NOT NULL,
+  `role_id` int(11) AUTO_INCREMENT NOT NULL,
   `role_type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -211,7 +211,7 @@ INSERT INTO `roles` (`role_id`, `role_type`) VALUES
 
 CREATE TABLE `users` (
   `full_name` varchar(80) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) AUTO_INCREMENT NOT NULL,
   `email` varchar(256) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
   `registration_date` varchar(20) NOT NULL,

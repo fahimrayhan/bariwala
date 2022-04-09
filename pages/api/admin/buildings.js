@@ -34,16 +34,19 @@ export default async function (req, res) {
 
         // Getting cookies
         const token = req.cookies["authToken"]
+
         if (!token) {
             res.redirect("/login")
         }
         // console.log(process.env.JWT_SEC)
         const verify = jwt.verify(token, process.env.JWT_SEC);
 
+
         if (!verify) {
             res.redirect("/login")
         }
 
+        
 
         else {
             try {
@@ -64,6 +67,7 @@ export default async function (req, res) {
             } catch (error) {
                 res.json({ msg: error.message })
             }
+
         }
     }
     

@@ -15,7 +15,6 @@ function addapartment() {
          fetch('http://localhost:3000/api/admin/buildings').then((response) => {
           response.json().then(data => {
             setBD(data)
-            buildings = [...data]
           })
         })
     }, [])
@@ -50,32 +49,33 @@ function addapartment() {
       toast(JSON.stringify(results.msg));
   }
 
-  return (
-    <>
-      <Head>
-        <title>Add a new apartment</title>
-      </Head>
-      <h1>Add Apartment</h1>
-      <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={handleSubmit}>
+  if (BD.length> 0) {
+    return (
+      <>
+        <Head>
+          <title>Add a new apartment</title>
+        </Head>
+        <h1>Add Apartment</h1>
+        <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={handleSubmit}>
           <div className="mb-3">
-              <label htmlFor="title" className="form-label">Title</label>
-              <input type="text" className="form-control" name="title" id="title" required placeholder="Single apartment for rent."/>
+            <label htmlFor="title" className="form-label">Title</label>
+            <input type="text" className="form-control" name="title" id="title" required placeholder="Single apartment for rent." />
           </div>
           <div className="mb-3">
-              <label htmlFor="beds" className="form-label">Number of Bedrooms</label>
-              <input type="number" className="form-control" name="beds" id="beds" required placeholder="0"/>
+            <label htmlFor="beds" className="form-label">Number of Bedrooms</label>
+            <input type="number" className="form-control" name="beds" id="beds" required placeholder="0" />
           </div>
           <div className="mb-3">
-              <label htmlFor="desc" className="form-label">Descriptions</label>
-              <textarea  id="desc" className="form-control"></textarea>
+            <label htmlFor="desc" className="form-label">Descriptions</label>
+            <textarea id="desc" className="form-control"></textarea>
           </div>
           <div className="mb-3">
-              <label htmlFor="bath" className="form-label">Baths</label>
-              <input type="number" className="form-control" id="bath" required placeholder="0"/>
+            <label htmlFor="bath" className="form-label">Baths</label>
+            <input type="number" className="form-control" id="bath" required placeholder="0" />
           </div>
           <div className="mb-3">
             <label htmlFor="month" className="form-label">Available From Month</label>
-          <input type="date" className="form-control" id="month" required />
+            <input type="date" className="form-control" id="month" required />
           </div>
           <div className="mb-3">
             <label htmlFor="floor" className="form-label">Which Floor?</label>
@@ -94,16 +94,16 @@ function addapartment() {
             <option value="High-rise3">High-rise</option>
           </select>
           {
-            BD && 
+            BD &&
             <select id="pid" className="form-select mb-3" aria-label="Default select example" >
               <option defaultValue="Property Type">Select Building</option>
-               {
-                 BD.map((item,key) =>{
-                   return(
-                     <option key={key} value={item.property_id}>{item.building_name}</option>
-                   )
-                 })
-               }
+              {
+                BD.map((item, key) => {
+                  return (
+                    <option key={key} value={item.property_id}>{item.building_name}</option>
+                  )
+                })
+              }
             </select>
           }
           <div className="mb-3">
@@ -113,10 +113,19 @@ function addapartment() {
           <div className="text-center mt-4">
             <button type="submit" className="btn btn-primary text-center">Submit</button>
           </div>
-      </form>
-      <ToastContainer />
-    </>
-  )
+        </form>
+        <ToastContainer />
+      </>
+    )
+  }
+
+  else{
+    return(
+      <div>
+        <h1>Data is not available</h1>
+      </div>
+    )
+  }
 }
 
 export default addapartment

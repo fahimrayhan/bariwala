@@ -41,6 +41,7 @@ function addBuilding() {
                     storeys: event.target.storeys.value,
                     lift:lift,
                     garage:garage,
+                    
                 }),
                 headers: {
                     'Content-Type': 'application/json'

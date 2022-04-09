@@ -46,7 +46,7 @@ CREATE TABLE page_img
 CREATE TABLE users
 (
   full_name VARCHAR(80) NOT NULL,
-  user_id INT NOT NULL,
+  user_id INT AUTO_INCREMENT NOT NULL,
   email VARCHAR(256) NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
   registration_date VARCHAR(20) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE users
 CREATE TABLE buildings
 (
   property_id INT AUTO_INCREMENT NOT NULL,
-  building_name VARCHAR(50) NOT NULL;,
+  building_name VARCHAR(50) NOT NULL,
   garage BOOLEAN NULL DEFAULT '0',
   lift BOOLEAN NULL DEFAULT '0',
   city_name VARCHAR(30) NOT NULL,

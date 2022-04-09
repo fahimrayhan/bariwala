@@ -9,7 +9,7 @@ function NavBar(cookie) {
 
     const isLoggedIn = () =>{
   
-        console.log(cookie.data.cookie)
+        // console.log(cookie.data.cookie)
 
         if (cookie.data.cookie) {
             return(

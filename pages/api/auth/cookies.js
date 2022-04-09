@@ -15,7 +15,7 @@ export default async function (req, res) {
             res.status(404).json({ msg: "Not Found" })
         }
         else {
-            res.status(200).json({ cookie: verify })
+            res.status(200).json({cookie: verify })
         }
     }
     

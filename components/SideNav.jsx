@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function SideNav() {
+function SideNav(cookie) {
 
     const router = useRouter()
 
@@ -22,13 +22,14 @@ function SideNav() {
         }, 2000);
         
     } 
+    // console.log(cookie)
 
   return (
         <div className="sidBar">
 
             <div className={Style.profile}>
-                <img src="/img_avatar.png" alt="User Avatar" className="avatar"/>
-                <h3 className={Style.username}>Fahim Rayhan</h3>
+                <img src="/img_avatar.png" alt="User Avatar" className="avatar mb-2"/>
+              <h3 className={Style.username}>{cookie.data.cookie.username}</h3>
                 <p className={Style.descriptions}>
                     lorem ipsum dolor sit amet, consectetur adip,
                 </p>
@@ -55,7 +56,7 @@ function SideNav() {
                         <Link href="/"><a>Gallery</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Users</a></Link>
+                        <Link href="/"><a>Profile</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Owners</a></Link>
@@ -64,7 +65,7 @@ function SideNav() {
                         <Link href="/"><a>Payment History</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Profile</a></Link>
+                      <Link href={`/users/profile/${cookie.data.cookie.id}`}><a>User</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Contact Us</a></Link>

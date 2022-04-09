@@ -22,6 +22,7 @@ export default async function (req, res) {
     }
     else{
         try {
+            console.log(verify)
             
             const results = await sql_query(
                 // OLD DB CODE
@@ -30,9 +31,8 @@ export default async function (req, res) {
 
                 // NEW DB CODE
                 `INSERT INTO apartments(title, beds, rent_per_month, type, area, baths, date, description, from_month, nth_floor, property_id, user_id) 
-                VALUES("${title}","${beds}","${rent}","${type}","${area}", "${bath}","${date}","${desc}","${month}","${floor}", "${pid}","${verify.user_id}")`
+                VALUES("${title}","${beds}","${rent}","${type}","${area}", "${bath}","${date}","${desc}","${month}","${floor}", "${pid}","${verify.id}")`
             )
-            console.log(results)
             if (results) {
                 res.json({msg:"Success"})
             }
