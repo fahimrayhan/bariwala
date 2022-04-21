@@ -1,41 +1,41 @@
 import Link from 'next/link'
+import { useContext } from 'react'
+import { DataContext } from '../store/GlobalState'
 
 
-
-
-function NavBar(cookie) {
-
+function NavBar() {
 
 
     const isLoggedIn = () =>{
-  
-        // console.log(cookie.data.cookie)
 
-        if (cookie.data.cookie) {
-            return(
+        const { state } = useContext(DataContext)
+
+        const { auth } = state
+        console.log(auth.user)
+     
+        if (auth.user) {
+            return (
                 <ul className="navbar-nav">
-                    <li className="nav-item">
+                    < li className="nav-item" >
                         <img className="img-thumbnail" style={{ maxWidth: '40px', height: '40px', borderRadius: '50%' }} src="./img_avatar.png" alt="" />
-                    </li>
+                    </li >
                     <li className="nav-item">
                         <Link href="/admin">
                             <a className="nav-link"> Dashboard</a>
                         </Link>
                     </li>
                 </ul>
-            )
-        }
-        else{
-            return(
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link href="/login">
-                            <a className="nav-link">Login</a>
-                        </Link>
-                    </li>
-                </ul>
-            )
-        }
+            ) 
+        } 
+        return(
+            <ul className="navbar-nav">
+                <li className="nav-item">
+                    <Link href="/login">
+                        <a className="nav-link">Login</a>
+                    </Link>
+                </li>
+            </ul>
+        )
     }
     
     

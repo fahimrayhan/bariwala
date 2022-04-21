@@ -5,6 +5,7 @@ const nextConfig = {
 
 module.exports = {
   env:{
-    JWT_SEC: process.env.JWT_SEC
+    JWT_SEC: process.env.JWT_SEC,
+    REFFRESH_SEC: process.env.REFFRESH_SEC
   }
 }

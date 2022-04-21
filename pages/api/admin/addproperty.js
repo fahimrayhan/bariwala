@@ -10,7 +10,7 @@ export default async function (req, res) {
     
     const date = new Date().toLocaleDateString()
     // Getting cookies
-    const token = req.cookies["authToken"]
+    const token = req.cookies["token"]
     if (!token) {
         res.redirect("/login")
     }

@@ -1,43 +1,41 @@
 import SideNav from './SideNav'
 import Style from '../styles/Nav.module.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect} from 'react'
+import { DataContext } from '../store/GlobalState'
+
+
 
 const AuthLayout = ({children}) => {
 
+    const { state } = useContext(DataContext)
 
-    const [cookie, setCookie] = useState([])
+    const { auth } = state
 
-    const [loading, setLoading] = useState(true)
+    const { user } = auth
+    
+    // useEffect(() => {
+        
+    // }, [auth])
+    
 
-    useEffect(() => {
-        fetch("http://localhost:3000/api/auth/cookies").then((response) => {
-            if (response.status === 200) {
-                response.json().then((data) => {
-                    setCookie(data)
-                    setLoading(false)
-                })
-            }
-            else {
-                setLoading(false)
-            }
-        })
-    }, [])
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
-    else{
-        return (
-            <div className={Style.authLayout}>
-                <div className={Style.sideNav}>
-                    <SideNav data={cookie} />
+        // if (!user) {
+        //     return <div>Loading...</div>
+        // }
+        // else{
+            return (
+
+                <div className={Style.authLayout}>
+                    <div className={Style.sideNav}>
+                        <SideNav />
+                    </div>
+                    <div className="p-2">
+                        {children}
+                    </div>
                 </div>
-                <div className="p-2">
-                    {children}
-                </div>
-            </div>
-        )
-    }
+
+            )
+        // }
 }
 
 export default AuthLayout

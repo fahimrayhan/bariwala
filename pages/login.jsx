@@ -1,10 +1,17 @@
+import {useContext} from 'react'
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import {DataContext} from '../store/GlobalState'
+import Cookie from 'js-cookie'
+
 function login() {
+
+    const {  dispatch } = useContext(DataContext)
+    
 
     const router = useRouter()
 
@@ -25,6 +32,19 @@ function login() {
         )
 
         const results = await res.json()
+
+        dispatch({type: 'AUTH', payload:{
+            token : results.token,
+            user: results.user
+        }})
+
+        Cookie.set('refresh_token', results.refresh_token,{
+            path: 'api/auth/accesstoken',
+            expires: 7
+        })
+
+        localStorage.setItem('firstLogin',true)
+
         toast(JSON.stringify(results.msg));
         setTimeout(() => {
             if (res.status == 200) {

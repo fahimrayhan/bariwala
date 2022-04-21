@@ -33,7 +33,7 @@ export default async function (req, res) {
         // console.log(city, thana, address, storeys, lift, garage)
 
         // Getting cookies
-        const token = req.cookies["authToken"]
+        const token = req.cookies["token"]
 
         if (!token) {
             res.redirect("/login")

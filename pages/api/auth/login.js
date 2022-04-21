@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         try {
             // Checking user exist or not
             const results = await sql_query(
-                `SELECT * FROM users WHERE email ="${email}" `
+                `SELECT user_id, email, password FROM users WHERE email ="${email}" `
             )
             // If User exists
             if (results && results.length > 0) {
@@ -40,17 +40,23 @@ export default async function handler(req, res) {
                     // Token Generation
                     const token = jwt.sign({
                         id: results[0].user_id,
-                        username: results[0].user_name,
-                        role: results[0].role_id,
-                        parent: results[0].parent_id
+                        // username: results[0].user_name,
+                        // role: results[0].role_id,
+                        // parent: results[0].parent_id
                     }, process.env.JWT_SEC, {
-                        expiresIn: '1h'
+                        expiresIn: 60*60
+                    })
+
+                    const refresh_token = jwt.sign({
+                        id: results[0].user_id,
+                    }, process.env.REFFRESH_SEC, {
+                        expiresIn: 60*60
                     })
 
                    
 
                     // Generating Cookies
-                    const serialize = cookie.serialize('authToken', token, {
+                    const serialize = cookie.serialize('token', token, {
                         httpOnly: true,
                         secure: true,
                         sameSite: "strict",
@@ -59,7 +65,7 @@ export default async function handler(req, res) {
                     })
 
 
-                    //Storing Cookies
+                    // Storing Cookies
                     res.setHeader('Set-Cookie', serialize)
 
 
@@ -68,14 +74,15 @@ export default async function handler(req, res) {
 
                     // Token Gen Successfull
                     res.status(200).json({
-                        "access-token": token,
+                        "token": token,
+                        "refresh_token":refresh_token,
                         "msg": "Login Successfull"
                     })
                 }
                 // If Password Does not match
                 else {
                     res.status(401).json({
-                        msg: "Authentication Error!"
+                        msg: "Wrong Email or Password"
                     })
                 }
             }

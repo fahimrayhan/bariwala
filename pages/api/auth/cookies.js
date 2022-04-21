@@ -4,7 +4,7 @@ import 'dotenv/config'
 
 export default async function (req, res) {
     // Getting cookies
-    const token = req.cookies["authToken"]
+    const token = req.cookies["token"]
     if (!token) {
         res.status(404).json({ msg:"Not Found"})
     }

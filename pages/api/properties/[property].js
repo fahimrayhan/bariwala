@@ -11,7 +11,7 @@ export default async function (req, res) {
         const { property } = req.query
 
         // Getting cookies
-        const token = req.cookies["authToken"]
+        const token = req.cookies["token"]
         if (!token) {
             res.redirect("/login")
         }

@@ -5,8 +5,9 @@ import bcrypt from 'bcrypt'
 
 export default async function handler(req, res) {
 
-    const { name, username, email, phone, birthdate, pass1, pass2 } = req.body;
+    const { name, username, email, phone, birthdate, pass1, pass2, role } = req.body;
 
+    // console.log(name, username, email, phone, birthdate, pass1, pass2)
 
     const isValid = valid(name, email, pass1, pass2)
     const date = new Date().toLocaleDateString()
@@ -22,7 +23,7 @@ export default async function handler(req, res) {
 
             // NEW DB CODE
             `INSERT INTO users(full_name, user_name, email, phone_number, password, registration_date, birth_date, role_id, is_authenticated) 
-            VALUES('${name}', '${username}', '${email}','${phone}','${hashedPass}','${date}','${birthdate}', '4','0')`
+            VALUES('${name}', '${username}', '${email}','${phone}','${hashedPass}','${date}','${birthdate}', ${role},'0')`
         )
         if (results) {
             res.json({ msg: "Successfully Registerd" })

@@ -1,19 +1,22 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import AuthLayout from "../../components/AuthLayout";
 import { ToastContainer, toast } from 'react-toastify';
-import {useState} from 'react'
+import { useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 
+const AddUser = () => {
 
-function register() {
+    const roles = {
+        1: "Admin",
+        2: "Owner"
+    }
 
-    const [username,setUsername] = useState("")
+    const [username, setUsername] = useState("")
 
     const registerUser = async event => {
         event.preventDefault()
 
         const res = await fetch(
-            'api/auth/register',
+            '/api/auth/register',
             {
                 body: JSON.stringify({
                     name: event.target.name.value,
@@ -23,8 +26,7 @@ function register() {
                     birthdate: event.target.b_date.value,
                     pass1: event.target.pass1.value,
                     pass2: event.target.pass2.value,
-                    role: 4
-
+                    role: event.target.role.value
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,32 +39,28 @@ function register() {
         toast(JSON.stringify(results.msg));
     }
 
-    return (
-        <>
-            <Head>
-                <title>Register | Bariwala</title>
-            </Head>
-            <h1>Register</h1>
-            <div>
+    return ( 
+        <div>
+            <h2>Add User</h2>
+            <div className="form">
                 <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={registerUser}>
                     {/* Inputs */}
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Full Name</label>
                         <input type="text" className="form-control" id="name" required
-                            onChange={(event) =>{
-                                const name = event.target.value.toLowerCase().replace(' ','-')
+                            onChange={(event) => {
+                                const name = event.target.value.toLowerCase().replace(/ /g, '-')
                                 setUsername(name);
                             }}
                         />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">User Name</label>
-                        <input type="text" className="form-control" id="username" required placeholder="username" value={username} disabled/>
+                        <input type="text" className="form-control" id="username" required placeholder="username" value={username} disabled />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
                         <input type="email" className="form-control" id="email" aria-describedby="emailHelp" />
-                        <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="phone" className="form-label">Phone Number</label>
@@ -72,14 +70,6 @@ function register() {
                         <label htmlFor="b_date" className="form-label">Birth Date</label>
                         <input type="date" className="form-control" id="b_date" required />
                     </div>
-                    {/* For Owner Reg */}
-                    {/* <div className="mb-3">
-                            <div className="mb-3">
-                                <label htmlFor="date" className="form-label">Birth Date</label>
-                                <input type="date" className="form-control" id="date" required />
-                            </div>
-                        </div> */}
-                    {/* For Owner Reg Ends*/}
                     <div className="mb-3">
                         <label htmlFor="pass1" className="form-label">Password</label>
                         <input type="password" className="form-control" id="pass1" />
@@ -88,29 +78,33 @@ function register() {
                         <label htmlFor="pass2" className="form-label">Confirm Password</label>
                         <input type="password" className="form-control" id="pass2" />
                     </div>
+                    <div className="mb-3">
+                        <label htmlFor="role" className="form-label">User Role</label>
+                        <select className="form-select" id="role">
+                            <option value='4' default>Subscriber</option>
+                            <option value='3'>Tenant</option>
+                            <option value='2'>Owner</option>
+                            <option value='1'>Admin</option>
+                        </select>
+                    </div>
                     {/* Inputs Ends*/}
                     {/* Submit Buttons & Links */}
                     <div className="text-center">
                         <button type="submit" className="btn btn-primary text-center">Submit</button>
-                        <div className="mt-2">
-                            <p>Already have an account?
-                                <Link href="/login">
-                                    <a> Login</a>
-                                </Link>
-                            </p>
-                            <p>
-                                Register as a
-                                <Link href="/reg-owner">
-                                    <a> Property Owner</a>
-                                </Link>
-                            </p>
-                        </div>
                     </div>
                 </form>
                 <ToastContainer />
             </div>
-        </>
+        </div>
+     );
+}
+ 
+export default AddUser;
+
+AddUser.getLayout = function getLayout(page) {
+    return (
+        <AuthLayout>
+            {page}
+        </AuthLayout>
     )
 }
-
-export default register

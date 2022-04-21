@@ -1,13 +1,25 @@
 import Link from "next/link"
 import Style from '../styles/Nav.module.css'
-import { useRouter } from 'next/router';
+import { useRouter} from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useContext, useEffect} from 'react'
+import {DataContext} from '../store/GlobalState'
+import Cookie from 'js-cookie'
 
 
-function SideNav(cookie) {
+function SideNav() {
+
+    const { state, dispatch } = useContext(DataContext)
+    const {auth} = state
 
     const router = useRouter()
+
+    // console.log(user)
+    // useEffect(() => {
+      
+    // }, [])
+    
 
     const logOut = async () => {
         const res = await fetch('/api/auth/logout')
@@ -16,22 +28,33 @@ function SideNav(cookie) {
         // console.log(results)
         toast(JSON.stringify(results.msg));
         setTimeout(() => {
+            Cookie.remove('refresh_token', { path: 'api/auth/accesstoken' })
+            localStorage.removeItem('firstLogin')
+            dispatch({
+                type: 'AUTH', payload: {}
+            })
             if (res.status === 200) {
                 router.push('/')
             }
         }, 2000);
         
     } 
-    // console.log(cookie)
 
-  return (
+    if (!auth.user) {
+        return(
+            <div>Loading</div>
+        )
+    }
+    return (
         <div className="sidBar">
 
             <div className={Style.profile}>
-                <img src="/img_avatar.png" alt="User Avatar" className="avatar mb-2"/>
-              <h3 className={Style.username}>{cookie.data.cookie.username}</h3>
+                <img src="/img_avatar.png" alt="User Avatar" className="avatar mb-2" />
+                <h3 className={Style.username}>
+                    {auth.user.full_name}
+                </h3>
                 <p className={Style.descriptions}>
-                    lorem ipsum dolor sit amet, consectetur adip,
+                    {auth.user.desc}
                 </p>
             </div>
 
@@ -56,7 +79,7 @@ function SideNav(cookie) {
                         <Link href="/"><a>Gallery</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Profile</a></Link>
+                        <Link href={`/profile/${auth.user.username}`}><a>Profile</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Owners</a></Link>
@@ -65,7 +88,7 @@ function SideNav(cookie) {
                         <Link href="/"><a>Payment History</a></Link>
                     </li>
                     <li className="nav-item">
-                      <Link href={`/users/profile/${cookie.data.cookie.id}`}><a>User</a></Link>
+                        <Link href="/users"><a>Users</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Contact Us</a></Link>
@@ -79,7 +102,7 @@ function SideNav(cookie) {
             </nav>
             <ToastContainer />
         </div>
-  )
+    )
 }
 
 export default SideNav
