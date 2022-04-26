@@ -2,8 +2,8 @@ import AuthLayout from "../../../components/AuthLayout";
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import valid from '../../../utils/validate'
 import 'react-toastify/dist/ReactToastify.css';
+import valid from '../../../utils/validate'
 import Styles from '../../../styles/Profile.module.css'
 
 const EditUser = () => {
@@ -11,6 +11,7 @@ const EditUser = () => {
     const router = useRouter()
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
+    const [verified, setVerified] = useState(false)
 
     useEffect(() => {
         if (!router.isReady) {
@@ -26,8 +27,9 @@ const EditUser = () => {
         })
     }, [router.isReady])
     
+  
 
-    const updateProfile = async (event) => {
+    const updateUser = async (event) => {
         event.preventDefault()
 
         if (event.target.pass.value && event.target.pass.value) {
@@ -72,7 +74,9 @@ const EditUser = () => {
                         about: event.target.about.value,
                         phone: event.target.phone.value,
                         nid: event.target.nid.value,
-                        bank: event.target.bank.value
+                        bank: event.target.bank.value,
+                        role: event.target.role.value,
+                        verified: verified
                     }),
                     headers: {
                         'Content-Type': 'application/json'
@@ -93,6 +97,12 @@ const EditUser = () => {
         4: "Subscriber",
     }
 
+    const handleChange = (event) => {
+        let verified = event.target.checked
+        console.log(verified)
+        setVerified(verified)
+    }
+
     if (loading) {
         return(
             <div>Loading...</div>
@@ -110,7 +120,7 @@ const EditUser = () => {
                 </div>
             </div>
 
-            <form className={Styles.form} onSubmit={updateProfile}>
+            <form className={Styles.form} onSubmit={updateUser}>
                 {/* Full Name */}
                 <div className="form-group mb-3 mt-3">
                     <label htmlFor="Full_name" className="form-label">Full Name</label>
@@ -120,6 +130,17 @@ const EditUser = () => {
                 <div className="form-group mb-3">
                     <label htmlFor="username" className="form-label">User Name</label>
                     <input type="text" className="form-control" id="username" placeholder="username" disabled defaultValue={data[0].user_name} />
+                </div>
+                {/* User Roles */}
+                <div className="form-group mb-3">
+                    <label htmlFor="role" className="form-label">User Role</label>
+                    <select id="role" className="form-select mb-3" aria-label="Default select example">
+                        <option defaultValue={data[0].role_id}>{roles[data[0].role_id]}</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Owner</option>
+                        <option value="3">Tenant</option>
+                        <option value="4">Subscriber</option>
+                    </select>
                 </div>
                 {/* Ocupation */}
                 <div className="form-group mb-3">
@@ -144,12 +165,12 @@ const EditUser = () => {
                 {/* NID */}
                 <div className="form-group mb-3">
                     <label htmlFor="nid" className="form-label">NID</label>
-                    <input type="text" className="form-control" id="nid" placeholder="Your NID" defaultValue={data[0].n_id} />
+                    <input type="text" className="form-control" id="nid" placeholder="Your NID" defaultValue={data[0].n_id} required />
                 </div>
                 {/* Bank */}
                 <div className="form-group mb-3">
                     <label htmlFor="bank" className="form-label">Bank Account</label>
-                    <input type="text" className="form-control" id="bank" placeholder="Your Bank Account Number" defaultValue={data[0].bank_acc} />
+                    <input type="text" className="form-control" id="bank" placeholder="Your Bank Account Number" defaultValue={data[0].bank_acc} required />
                 </div>
                 {/* Pass */}
                 <div className="form-group mb-3">
@@ -161,6 +182,14 @@ const EditUser = () => {
                     <label htmlFor="c_pass" className="form-label">Confirm Password</label>
                     <input type="password" className="form-control" id="c_pass" placeholder="Confirm Password" />
                 </div>
+
+                {/* Verify User */}
+                
+                <input type="checkbox" className="btn-check" id="verify" onChange={(e)=>{
+                    handleChange(e);
+                }}/>
+                <label className="btn btn-outline-primary" htmlFor="verify">Verified?</label>
+
                 {/* Submit */}
                 <div className={Styles.button}>
                     <button type="submit" className="btn btn-info">Update</button>

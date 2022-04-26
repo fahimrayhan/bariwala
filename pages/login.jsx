@@ -40,7 +40,7 @@ function login() {
 
         Cookie.set('refresh_token', results.refresh_token,{
             path: 'api/auth/accesstoken',
-            expires: 7
+            expires: 1/24
         })
 
         localStorage.setItem('firstLogin',true)
