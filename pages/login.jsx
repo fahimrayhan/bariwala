@@ -75,7 +75,7 @@ function login() {
                         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                     </div>
                     <div className="text-center">
-                        <button type="submit" className="btn btn-primary text-center">Submit</button>
+                        <button type="submit" className="btn btn-primary text-center">Login</button>
                         <div className="mt-2">
                             <p>Don't have an account?
                                 <Link href="/register">

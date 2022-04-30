@@ -44,7 +44,11 @@ function NavBar() {
 
         <nav className="navbar navbar-expand-md navbar-light bg-light nav-fill">
               <div className="container-fluid">
-                  <Link href="/"><a className="navbar-brand">Bariwala</a></Link>
+                  <Link href="/">
+                        <a className="navbar-brand">
+                            <img src="/nav_logo.png" alt="Nav Logo"/>  
+                        </a>
+                    </Link>
                   <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                       <span className="navbar-toggler-icon"></span>
                   </button>

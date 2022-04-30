@@ -44,7 +44,7 @@ const UserList = ({user}) => {
                 }}>Delete</button>
             </td>
         </tr>
-            <ToastContainer />
+            {/* <ToastContainer /> */}
         </>
      );
 }
