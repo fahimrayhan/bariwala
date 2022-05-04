@@ -3,6 +3,7 @@ import PropertyCard from "../components/PropertyCard";
 import RecentPosts from "../components/RecentPosts";
 import Link from "next/link";
 import HeaderSearch from "../components/HeaderSearch";
+import PropertyCardSingle from "../components/PropertyCardSingle";
 
 function index({ data }) {
 
@@ -33,7 +34,8 @@ function index({ data }) {
       {/* Property Sections */}
       <div className="properties">
         <h3 className="text-center">Popular Apartments</h3>
-        <PropertyCard data={data} />
+        {/* <PropertyCard data={data} /> */}
+        <PropertyCardSingle data={data}/>
       </div>
       {/* AddPropertySection */}
       <div className="mb-5 shadow-sm rounded">
