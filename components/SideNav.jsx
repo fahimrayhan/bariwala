@@ -52,10 +52,10 @@ function SideNav() {
                         <Link href="/admin"><a>Dashboard</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/admin/add-building"><a>Add Building</a></Link>
+                        <Link href="/admin/buildings/"><a>Buildings</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/admin/add-apartment"><a>Add Apartment</a></Link>
+                        <Link href="/admin/apartments/"><a>Apartments</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Posts</a></Link>
@@ -97,10 +97,10 @@ function SideNav() {
                         <Link href="/admin"><a>Dashboard</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/admin/add-building"><a>Add Building</a></Link>
+                        <Link href="/admin/buildings/"><a>Buildings</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/admin/add-apartment"><a>Add Apartment</a></Link>
+                        <Link href="/admin/apartments/"><a>Apartments</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Posts</a></Link>
@@ -142,7 +142,7 @@ function SideNav() {
                         <Link href={`/profile/${auth.user.username}`}><a>Profile</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Payment History</a></Link>
+                        <Link href="/"><a>Payment</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/contact"><a>Contact Us</a></Link>

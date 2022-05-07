@@ -60,32 +60,41 @@ export default async function (req, res) {
         }
 
         else{
-            // console.log(process.env.JWT_SEC)
-            const verify = jwt.verify(token, process.env.JWT_SEC);
+           
+            try {
 
-            if (!verify) {
-                res.redirect("/login")
-            }
-            else{
-                try {
+                
 
-                    // console.log(full_name, occupation, about, phone, nid, bank)
+                // console.log(full_name, occupation, about, phone, nid, bank)
+                // If Role Given
+                if (role) {
                     const results = await sql_query(
                         `UPDATE users SET full_name = "${full_name}", phone_number = "${phone}", n_id = "${nid}", occupation="${occupation}", bank_acc="${bank}", user_desc ="${about}", role_id="${role}", is_authenticated = "${verified}"   WHERE users.user_name = "${username}"`
                     )
-
                     if (results) {
-                        res.json({msg:"Profile Updated"})
+                        res.json({ msg: "Profile Updated" })
                     }
-                    else{
-                        res.json({msg: "Save Failed"})
-                    }
-
-                    
-                } catch (error) {
-                    res.json({ msg: error.message })
+                    else {
+                        res.json({ msg: "Save Failed" })
+                    }  
                 }
+                // If role is not given
+                else{
+                    const results = await sql_query(
+                        `UPDATE users SET full_name = "${full_name}", phone_number = "${phone}", n_id = "${nid}", occupation="${occupation}", bank_acc="${bank}", user_desc ="${about}", is_authenticated = "${verified}"   WHERE users.user_name = "${username}"`
+                    )
+                    if (results) {
+                        res.json({ msg: "Profile Updated" })
+                    }
+                    else {
+                        res.json({ msg: "Save Failed" })
+                    }
+                }
+                
+            } catch (error) {
+                res.json({ msg: error.message })
             }
+            
         }
 
 

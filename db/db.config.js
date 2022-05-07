@@ -5,8 +5,8 @@ import 'dotenv/config'
 export const db = mysql({
     config:{
         host: "localhost",
-        port: 3306,
-        database: "bariwala",
+        port: 3446,
+        database: "bariwala_db",
         user: "fahim",
         password: "fahim1160"
     }
