@@ -44,8 +44,10 @@ export default async function (req, res) {
     }
     if (req.method === "PATCH") {
 
-        const { username, full_name, occupation, about, phone, nid, bank, role, verified } = req.body
-        // console.log(username, full_name, occupation, about, phone, nid, bank)
+        const {username} = req.query
+        console.log(username)
+        const { name, full_name, occupation, about, phone, nid, bank, role, verified } = req.body
+        console.log( nid, bank)
         // console.log(verified)
         // Getting cookies
         const token = req.cookies["token"]

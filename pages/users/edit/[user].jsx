@@ -68,7 +68,7 @@ const EditUser = () => {
                 `/api/profile/${data[0].user_name}`,
                 {
                     body: JSON.stringify({
-                        username: data[0].user_name,
+                        name: data[0].user_name,
                         full_name: event.target.Full_name.value,
                         occupation: event.target.occupation.value,
                         about: event.target.about.value,
