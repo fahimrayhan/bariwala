@@ -33,9 +33,13 @@ function index({ data }) {
 
       {/* Property Sections */}
       <div className="properties">
-        <h3 className="text-center">Popular Apartments</h3>
-        {/* <PropertyCard data={data} /> */}
-        <PropertyCardSingle data={data}/>
+          <h3 className="text-center">Popular Apartments</h3>
+          <div className="properties d-flex justify-content-center align-items-center">
+                <div className="row p-4">
+                  <PropertyCard data={data} />
+                </div>
+            {/* <PropertyCardSingle data={data}/> */}
+          </div>
       </div>
       {/* AddPropertySection */}
       <div className="mb-5 shadow-sm rounded">
@@ -47,7 +51,7 @@ function index({ data }) {
             className="col-md-6 d-flex align-items-center justify-content-center"
             style={{ backgroundColor: "#E6E6E6" }}
           >
-            <div className="text-center">
+            <div className="text-center p-4">
               <h2>SUBMIT AN APARTMENT</h2>
               <p>Add your Apartment details here</p>
               <Link href="/admin/add-apartment">

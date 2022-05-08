@@ -74,9 +74,16 @@ export default async function (req, res) {
             }
         }
     }
+
+    // Updating Property Details
+
     if (req.method === "PATCH") {
-       
-        const { property_id } = req.body
+        
+        const {id} = req.query
+        console.log(id)
+
+        const { name, thana, address, storeys, lift, garage } = req.body
+        console.log(name, thana, address, storeys, lift, garage)
 
         // Getting cookies
         const token = req.cookies["token"]
@@ -93,14 +100,21 @@ export default async function (req, res) {
             try {
 
                 const results = await sql_query(
-                    `DELETE FROM buildings WHERE property_id = "${property_id}"`
+                    `UPDATE buildings SET 
+                        garage = "${garage}",
+                        lift = "${lift}",
+                        address = "${address}",
+                        thana = "${thana}",
+                        building_name = "${name}",
+                        total_floor = "${storeys}"
+                        WHERE property_id = ${id}`
                 )
 
                 if (results) {
-                    res.json({ msg: "Building Has Been Archived" })
+                    res.json({ msg: "Success!" })
                 }
                 else {
-                    res.json({ msg: "Failed, Probably You Have Apartments Left" })
+                    res.json({ msg: "Failed, Please try again later" })
                 }
 
 

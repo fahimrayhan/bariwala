@@ -1,38 +1,21 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
-import Select from 'react-select';
 
 const EditBuilding = ({data}) => {
 
-    console.log(data)
+    const [lift, setLift] = useState("")
+    const [garage, setGarage] = useState("")
 
-    const [city, setCity] = useState(data.city_name)
-    const [lift, setLift] = useState(data.lift)
-    const [garage, setGarage] = useState(data.garage)
-
-    const cities = [
-        { value: 'Dhaka', label: 'Dhaka' },
-        { value: 'Chittagong', label: 'Chittagong' },
-        { value: 'Khulna', label: 'Khulna' },
-        { value: 'Sylhet', label: 'Sylhet' },
-        { value: 'Rajshahi', label: 'Rajshahi' },
-        { value: 'Mymenshingh', label: 'Mymenshingh' },
-        { value: 'Barishal', label: 'Barishal' },
-        { value: 'Gazipur', label: 'Gazipur' },
-        { value: 'Narayanganj', label: 'Narayanganj' },
-        { value: 'Comilla', label: 'Comilla' },
-        { value: 'Rangpur', label: 'Rangpur' },
-    ];
+    
 
     const handleUpdate = async (event) => {
         event.preventDefault()
         const res = await fetch(
-            '/api/admin/buildings/',
+            `/api/buildings/${data.property_id}`,
             {
                 body: JSON.stringify({
                     name: event.target.name.value,
-                    city: city.value,
                     thana: event.target.thana.value,
                     address: event.target.address.value,
                     storeys: event.target.storeys.value,
@@ -53,45 +36,44 @@ const EditBuilding = ({data}) => {
     
     return (
         <>
-            <h1>Add Building Information</h1>
+            <h1>Update Building Information</h1>
             <div>
                 <form className="p-5 mx-auto" style={{ maxWidth: '500px' }} onSubmit={handleUpdate}>
 
 
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Building Name</label>
-                        <input type="text" className="form-control" id="name" placeholder="ABC Villa" required />
+                        <input type="text" className="form-control" id="name" defaultValue={data.building_name} />
                     </div>
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="city" className="form-label">City</label>
                         <Select
                             id="city"
-                            defaultValue={"City"}
+                            defaultValue={data.city_name}
                             onChange={setCity}
                             options={cities}
                         />
-
-                    </div>
+                    </div> */}
                     <div className="mb-3">
                         <label htmlFor="thana" className="form-label">Thana</label>
-                        <input type="text" className="form-control" id="thana" placeholder="Thana" required />
+                        <input type="text" className="form-control" id="thana" defaultValue={data.thana}/>
                     </div>
                     <div className="mb-3">
                         <div className="mb-3">
                             <label htmlFor="address" className="form-label">Address</label>
-                            <textarea id="address" className="form-control"></textarea>
+                            <textarea id="address" className="form-control" defaultValue={data.address}></textarea>
                         </div>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="storeys" className="form-label">Storeys</label>
-                        <input type="number" className="form-control" id="storeys" placeholder="5" required />
+                        <input type="number" className="form-control" id="storeys" placeholder="5" defaultValue={data.total_floor} />
                     </div>
 
                     {/* Radio Buttons */}
                     <div className="mb-3 text-center">
                         <fieldset onChange={(e) => {
-                            setLift(e.target.value);
+                            setLift(e.target.value)
                         }}>
                             <span className="me-2">Have Lift Facilities? </span>
                             <div className="form-check form-check-inline">

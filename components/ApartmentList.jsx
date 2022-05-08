@@ -1,7 +1,28 @@
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ApartmentList = ({data}) => {
     console.log(data)
+
+    const handleDelete = async (id) => {
+        const res = await fetch(
+            `/api/apartments/${id}`,
+            {
+                body: JSON.stringify({
+                    apartment_id: id,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'DELETE'
+            }
+        )
+        const results = await res.json()
+        // console.log(results)
+        toast(JSON.stringify(results.msg));
+    }
+
     return (
         <div className="card w-80 m-2">
             <div className="card-body">
@@ -25,9 +46,9 @@ const ApartmentList = ({data}) => {
                                 </Link>
                             </li>
                             <li className="list-inline-item">
-                                <Link href={`/admin/apartments/edit/${data.apartment_id}`}>
-                                    <a className="btn btn-danger">Delete</a>
-                                </Link>
+                                <button className="btn btn-danger" onClick={(e) => {
+                                    handleDelete(data.apartment_id)
+                                }}>Delete</button>
                             </li>
                             <li className="list-inline-item">
                                 <Link href={`/admin/apartments/edit/${data.apartment_id}`}>

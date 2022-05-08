@@ -3,10 +3,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddApartment = () => {
+
     const [BD, setBD] = useState([])
+    const [bachelor, setBachelor] = useState('')
 
     useEffect(() => {
-
         fetch('http://localhost:3000/api/admin/buildings').then((response) => {
             response.json().then(data => {
                 setBD(data)
@@ -31,6 +32,7 @@ const AddApartment = () => {
                     rent: event.target.rent.value,
                     type: event.target.type.value,
                     area: event.target.area.value,
+                    bachelor: bachelor,
                     pid: event.target.pid.value,
                 }),
                 headers: {
@@ -101,6 +103,22 @@ const AddApartment = () => {
                     <div className="mb-3">
                         <label htmlFor="area" className="form-label">Square Feet?</label>
                         <input type="number" className="form-control" id="area" required placeholder="1750" />
+                    </div>
+                    {/* Radio Buttons */}
+                    <div className="mb-3 text-center">
+                        <fieldset onChange={(e) => {
+                            setBachelor(e.target.value);
+                        }}>
+                            <span className="me-2">Available For Bachelors?</span>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="rd1" id="inlineRadio1" value="1" />
+                                <label className="form-check-label" htmlFor="inlineRadio1">Yes</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="rd1" id="inlineRadio2" value="0" />
+                                <label className="form-check-label" htmlFor="inlineRadio2">No</label>
+                            </div>
+                        </fieldset>
                     </div>
                     <div className="text-center mt-4">
                         <button type="submit" className="btn btn-primary text-center">Submit</button>

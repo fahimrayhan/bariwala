@@ -1,14 +1,17 @@
 import {AiOutlineMail} from 'react-icons/ai'
 import { IoCallOutline } from 'react-icons/io5'
-import {FaBath, FaBed, FaRegBuilding} from 'react-icons/fa'
+import { FaBath, FaBed, FaRegBuilding, FaMale } from 'react-icons/fa'
 import {BiDollar} from 'react-icons/bi'
 import {VscSymbolRuler} from 'react-icons/vsc'
 import {AiTwotoneCalendar} from 'react-icons/ai'
-import {FiPackage} from 'react-icons/fi'
+import { FiPackage } from 'react-icons/fi'
 import PropertyCardSingle from './PropertyCardSingle'
 import Link from 'next/link'
 
 const PropertyDesc = ({data}) => {
+
+  console.log(data.results[0], "Hello")
+
     return ( 
         <div className="container">
           <h2 className="title  m-4">{data.results[0].title}</h2>
@@ -61,13 +64,17 @@ const PropertyDesc = ({data}) => {
                   <p className="fw-bold">Rent Per Month: {data.results[0].rent_per_month}</p>
                   <p className="fw-bold">Available From: {data.results[0].from_month}</p> */}
 
-                 <p className="fw-bold"><FiPackage/> {data.results[0].type}</p>
-                  <p className="fw-bold"><VscSymbolRuler/> {data.results[0].area} sqft</p>
+                 <p className="fw-bold fs-6"><FiPackage/> {data.results[0].type}</p>
+                  <p className="fw-bold fs-6"><VscSymbolRuler/> {data.results[0].area} sqft</p>
                   <p className="fw-bold"><FaBed/> {data.results[0].beds} Beds</p>
-                  <p className="fw-bold"><FaBath/> {data.results[0].baths} Baths</p>
-                  <p className="fw-bold"><FaRegBuilding/> {data.results[0].nth_floor} Floors</p>
-                  <p className="fw-bold"><BiDollar/> {data.results[0].rent_per_month} Taka</p>
-                  <p className="fw-bold"><AiTwotoneCalendar/> {data.results[0].from_month}</p>
+                  <p className="fw-bold fs-6"><FaBath/> {data.results[0].baths} Baths</p>
+                  <p className="fw-bold fs-6"><FaRegBuilding/> {data.results[0].nth_floor} Floors</p>
+                  <p className="fw-bold fs-6"><BiDollar/> {data.results[0].rent_per_month} Taka</p>
+                  <p className="fw-bold fs-6"><AiTwotoneCalendar/> {data.results[0].from_month}</p>
+                  {
+                    data.results[0].for_bachelor === 1 ? <p className="fw-bold fs-5" style={{color:'green'}}><FaMale />Yes</p> : <p className="fw-bold"><FaMale />No</p>
+                  }
+                  
                 </div>
               </div>
               <div className="contactInfo ">
@@ -91,9 +98,10 @@ const PropertyDesc = ({data}) => {
             </div>
           </div>
           {/* More Properties */}
+         
           <div className="row">
               <div className="col-md-4">
-                  <PropertyCardSingle data={data.results[0]}/>
+                <PropertyCardSingle data={data.results[0]}/>
               </div>
               <div className="col-md-4">
                   <PropertyCardSingle data={data.results[0]}/>

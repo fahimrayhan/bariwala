@@ -138,6 +138,7 @@ CREATE TABLE apartments
   from_month VARCHAR(20) NOT NULL,
   nth_floor INT NOT NULL,
   property_id INT NOT NULL,
+  for_bachelor BOOLEAN NULL DEFAULT '0',
   user_id INT NOT NULL,
   PRIMARY KEY (apartment_id),
   FOREIGN KEY (property_id) REFERENCES buildings(property_id),
