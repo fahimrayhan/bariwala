@@ -58,6 +58,7 @@ export default async function (req, res) {
         try {
 
             const results = await sql_query(
+                
                 `SELECT full_name, email, phone_number, registration_date, is_authenticated,  birth_date, n_id, occupation, rent_status, dues, balance, bank_acc, tin_certificate, user_name, role_id FROM users WHERE user_id = '${id}'`
                 
             )

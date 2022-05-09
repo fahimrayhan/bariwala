@@ -11,7 +11,7 @@ function NavBar() {
         const { state } = useContext(DataContext)
 
         const { auth } = state
-        console.log(auth.user)
+        // console.log(auth.user)
      
         if (auth.user) {
             return (

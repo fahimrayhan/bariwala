@@ -1,9 +1,9 @@
 import Link from "next/link"
 import Style from '../styles/Nav.module.css'
-import { useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {useContext, useEffect} from 'react'
+import { useContext} from 'react'
 import {DataContext} from '../store/GlobalState'
 import Cookie from 'js-cookie'
 
@@ -14,12 +14,6 @@ function SideNav() {
     const {auth} = state
 
     const router = useRouter()
-
-    // console.log(user)
-    // useEffect(() => {
-      
-    // }, [])
-    
 
     const logOut = async () => {
         const res = await fetch('/api/auth/logout')
@@ -41,6 +35,7 @@ function SideNav() {
     }
 
     const SideNavByRoles = () =>{
+
         // Admin
         if (auth.user.role === 1) {
             return(
@@ -142,7 +137,13 @@ function SideNav() {
                         <Link href={`/profile/${auth.user.username}`}><a>Profile</a></Link>
                     </li>
                     <li className="nav-item">
+                        <Link href={`/users/rent/${auth.user.id}`}><a>Apartments</a></Link>
+                    </li>
+                    <li className="nav-item">
                         <Link href="/"><a>Payment</a></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/"><a>Complains</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/contact"><a>Contact Us</a></Link>
@@ -184,6 +185,7 @@ function SideNav() {
     if (!auth.user) {
         return(
             <div>Loading</div>
+            
         )
     }
     return (

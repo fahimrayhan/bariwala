@@ -47,8 +47,8 @@ export default async function (req, res) {
         const {username} = req.query
         console.log(username)
         const { name, full_name, occupation, about, phone, nid, bank, role, verified } = req.body
-        console.log( nid, bank)
-        // console.log(verified)
+        // console.log( nid, bank)
+        console.log(verified)
         // Getting cookies
         const token = req.cookies["token"]
         if (!token) {

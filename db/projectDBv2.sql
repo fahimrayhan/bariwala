@@ -48,6 +48,7 @@ CREATE TABLE contacts
   contact_id INT AUTO_INCREMENT NOT NULL,
   sender_name VARCHAR(80) NOT NULL,
   sender_email VARCHAR(256) NOT NULL,
+  reciever_id INT NOT NULL,
   msg TEXT NOT NULL,
   msg_date VARCHAR(20) NOT NULL,
   receiver_email VARCHAR(80) NOT NULL,

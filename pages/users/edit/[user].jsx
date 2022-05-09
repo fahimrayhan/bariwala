@@ -11,7 +11,7 @@ const EditUser = () => {
     const router = useRouter()
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
-    const [verified, setVerified] = useState(false)
+    const [verified, setVerified] = useState(0)
 
     useEffect(() => {
         if (!router.isReady) {
@@ -100,7 +100,7 @@ const EditUser = () => {
     const handleChange = (event) => {
         let verified = event.target.checked
         console.log(verified)
-        setVerified(verified)
+        setVerified(1)
     }
 
     if (loading) {

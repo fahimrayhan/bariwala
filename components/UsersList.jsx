@@ -28,6 +28,7 @@ const UserList = ({user}) => {
         const results = await res.json()
         // console.log(results)
         toast(JSON.stringify(results.msg));
+        window.location.reload(false);
     }
     return ( 
         <>
