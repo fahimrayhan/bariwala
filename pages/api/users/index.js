@@ -18,15 +18,33 @@ export default async function (req, res) {
         }
         else{
             try {
-                const results = await sql_query(
-                    `SELECT * FROM users WHERE NOT user_id = ${verify.id} `
-                )
+                console.log(verify)
+                if (verify.role === 1) {
+                    const results = await sql_query(
+                        `SELECT * FROM users WHERE NOT user_id = ${verify.id} `
+                    )
 
-                if (results && results.length > 0) {
-                    res.json(results)
+                    if (results && results.length > 0) {
+                        res.json(results)
+                    }
+                    else {
+                        res.json({ msg: "No User" })
+                    }
                 }
-                else {
-                    res.json({msg:"No User"})
+                else if (verify.role === 2) {
+                    const results = await sql_query(
+                        `SELECT * FROM users WHERE parent_id = ${verify.id} `
+                    )
+
+                    if (results && results.length > 0) {
+                        res.json(results)
+                    }
+                    else {
+                        res.json({ msg: "No User" })
+                    }
+                }
+                else{
+                    res.json({ msg: "Not Permitted"})
                 }
                 
             } catch (error) {

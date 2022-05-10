@@ -55,11 +55,11 @@ const buildings = () => {
 
                 {/* Building Lists */}
                 {
-                    data.map((value, key) =>{
-                        return(
+                    data && data.length > 0 ? data.map((value, key) => {
+                        return (
                             <BuildingLists data={value} key={key} />
                         )
-                    })
+                    }) : <div className="text-center">Nothing Found! Please Add Some Building First</div>
                 }
                 {/* Load More Button */}
                 <div className="button d-flex justify-content-center mt-2">

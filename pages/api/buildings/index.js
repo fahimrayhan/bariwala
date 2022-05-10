@@ -17,16 +17,33 @@ export default async function (req, res) {
        }
        else{
            try {
-               const results = await sql_query(
-                   `SELECT full_name,  building_name, city_name, property_id 
+               if (verify.role === 1) {
+                   const results = await sql_query(
+                       `SELECT full_name,  building_name, city_name, property_id 
                     FROM buildings NATURAL JOIN users`
-               )
+                   )
 
-               if (results && results.length > 0) {
-                   res.json(results)
+                   if (results && results.length > 0) {
+                       res.json(results)
+                   }
+                   else {
+                       res.json({ msg: "No Buildings Found" })
+                   }
                }
-               else {
-                   res.json({ msg: "No Buildings Found" })
+               else if(verify.role === 2){
+                   const results = await sql_query(
+                       `SELECT full_name,  building_name, city_name, property_id 
+                    FROM buildings NATURAL JOIN users 
+                    WHERE buildings.user_id = "${verify.id}"
+                    `
+                   )
+
+                   if (results && results.length > 0) {
+                       res.json(results)
+                   }
+                   else {
+                       res.json({ msg: "No Buildings Found" })
+                   }
                }
 
            } catch (error) {

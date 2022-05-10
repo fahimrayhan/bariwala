@@ -137,7 +137,7 @@ function SideNav() {
                         <Link href={`/profile/${auth.user.username}`}><a>Profile</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href={`/users/rent/${auth.user.id}`}><a>Apartments</a></Link>
+                        <Link href={`/users/rent/`}><a>Apartments</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/"><a>Payment</a></Link>

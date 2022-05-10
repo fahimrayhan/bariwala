@@ -59,22 +59,27 @@ export default async function (req, res) {
         }
         else {
             try {
+                
+                if (verify.role === 1 || verify.role === 2) {
+                    const results = await sql_query(
+                        `DELETE FROM apartments WHERE apartment_id = "${apartment_id}"`
+                    )
 
-                const results = await sql_query(
-                    `DELETE FROM apartments WHERE apartment_id = "${apartment_id}"`
-                )
-
-                if (results) {
-                    res.json({ msg: "Apartment Has Been Removed" })
+                    if (results) {
+                        res.json({ msg: "Apartment Has Been Removed" })
+                    }
+                    else {
+                        res.json({ msg: "Failed, Probably You Have Tenants Left" })
+                    }
                 }
-                else {
-                    res.json({ msg: "Failed" })
+                else{
+                    res.json({msg: "Not Permitted"})
                 }
-
 
             } catch (error) {
                 res.json({ msg: error.message })
             }
+            
         }
     }
 

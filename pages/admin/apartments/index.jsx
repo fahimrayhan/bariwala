@@ -52,7 +52,7 @@ const apartments = () => {
                     </div>
                 </div>
 
-                {/* Building Lists */}
+                {/* Apartments List */}
                 {
                     data.length > 0 ? data.map((value,key) =>{
                         return(
@@ -60,7 +60,7 @@ const apartments = () => {
                         )
                     }):
                     <div>
-                        <p>Nothing Found!</p>
+                        <p className="text-center">Nothing Found! Please Add Some Apartments First</p>
                     </div>
                 }
                 {/* Load More Button */}

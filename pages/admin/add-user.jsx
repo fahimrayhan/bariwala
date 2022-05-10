@@ -1,9 +1,14 @@
 import AuthLayout from "../../components/AuthLayout";
 import { ToastContainer, toast } from 'react-toastify';
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
+import { DataContext } from "../../store/GlobalState";
+
 
 const AddUser = () => {
+
+    const {state} = useContext(DataContext)
+    const {auth} = state
 
     const roles = {
         1: "Admin",
@@ -13,6 +18,7 @@ const AddUser = () => {
     const [username, setUsername] = useState("")
 
     const registerUser = async event => {
+        
         event.preventDefault()
 
         const res = await fetch(
@@ -26,7 +32,8 @@ const AddUser = () => {
                     birthdate: event.target.b_date.value,
                     pass1: event.target.pass1.value,
                     pass2: event.target.pass2.value,
-                    role: event.target.role.value
+                    role: event.target.role.value,
+                    parent_id: event.target.parent.value
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -78,15 +85,31 @@ const AddUser = () => {
                         <label htmlFor="pass2" className="form-label">Confirm Password</label>
                         <input type="password" className="form-control" id="pass2" />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="role" className="form-label">User Role</label>
-                        <select className="form-select" id="role">
-                            <option value='4' default>Subscriber</option>
-                            <option value='3'>Tenant</option>
-                            <option value='2'>Owner</option>
-                            <option value='1'>Admin</option>
-                        </select>
-                    </div>
+                    {
+                        auth.user.role === 1 ? 
+                        <div className="mb-3">
+                            <label htmlFor="role" className="form-label">User Role</label>
+                            <select className="form-select" id="role">
+                                <option value='4' default>Subscriber</option>
+                                <option value='3'>Tenant</option>
+                                <option value='2'>Owner</option>
+                                <option value='1'>Admin</option>
+                            </select>
+                        </div> : 
+                            <div>
+                                <div className="mb-3">
+                                    <label htmlFor="role" className="form-label">Parent ID:</label>
+                                    <input type="text" name="parent" id="parent" className="form-control" disabled value={auth.user.id} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="role" className="form-label">User Role:</label>
+                                    <select className="form-select" id="role">
+                                        <option value='3' default>Tenant</option>
+                                        <option value='3'>Tenant</option>
+                                    </select>
+                                </div>
+                            </div>
+                    }
                     {/* Inputs Ends*/}
                     {/* Submit Buttons & Links */}
                     <div className="text-center">

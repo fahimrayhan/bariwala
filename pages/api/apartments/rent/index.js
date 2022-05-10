@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
 import 'dotenv/config'
 import { sql_query } from '../../../../db/db.config'
+import { db } from '../../../../db/db.config'
 
 export default async function (req, res) {
 
@@ -71,8 +72,9 @@ export default async function (req, res) {
         }
         else {
             try {
-                const results = await sql_query(
-                    `INSERT INTO lease (tenure_from, tenure_to, description, owner_id, user_id, apartment_id) 
+
+                const results = await db.transaction().query(
+                    `INSERT INTO lease (tenure_from, tenure_to, description, owner_id, user_id, apartment_id)
                     VALUES(
                         "${from}",
                         "${to}",
@@ -81,7 +83,9 @@ export default async function (req, res) {
                         "${uid}",
                         "${pid}"
                     )`
-                )
+                ).query(
+                    `UPDATE users SET parent_id = "${owner}" WHERE users.user_id = "${uid}";`
+                ).commit()
 
                 if (!results) {
                     res.json({ msg: "Failed! Try Again" })

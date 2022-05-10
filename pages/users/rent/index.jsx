@@ -10,15 +10,16 @@ const Rents = () => {
     const { rent } = router.query
     const [data, setData] = useState([])
 
-    // const {state} = useContext(DataContext)
-    // const {auth} = state
+    const {state} = useContext(DataContext)
+    const {auth} = state
 
     useEffect(() => {
-        if (!rent) {
+        if (!auth) {
             return
         }
         else{
-            fetch(`/api/apartments/rent/${rent}`).then((response) => {
+            // console.log(auth.user.id)
+            fetch(`/api/apartments/rent/${auth.user.id}`).then((response) => {
                 response.json().then(data => {
                     // console.log(data)
                     setData(data);
