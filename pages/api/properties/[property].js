@@ -11,7 +11,7 @@ export default async function (req, res) {
         const { property } = req.query
 
         // Getting cookies
-        const token = req.cookies["authToken"]
+        const token = req.cookies["token"]
         if (!token) {
             res.redirect("/login")
         }
@@ -49,7 +49,7 @@ export default async function (req, res) {
         // res.status(200).json({ msg: "Success" })
         try {
             const results = await sql_query(
-                `SELECT apartment_id, beds, description, rent_per_month, type, title, baths, area, date, from_month, nth_floor, property_id, users.email, users.phone_number, users.full_name 
+                `SELECT apartment_id, beds, description, rent_per_month, type, title, baths, area, date, from_month, for_bachelor, nth_floor, property_id, users.email, users.phone_number, users.full_name 
                 FROM apartments NATURAL JOIN users
                 WHERE apartments.apartment_id = '${property}'`
             )

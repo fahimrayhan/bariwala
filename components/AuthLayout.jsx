@@ -1,6 +1,10 @@
 import SideNav from './SideNav'
 import Style from '../styles/Nav.module.css'
+
 const AuthLayout = ({children}) => {
+
+    
+
     return (
         <div className={Style.authLayout}>
             <div className={Style.sideNav}>
@@ -10,7 +14,9 @@ const AuthLayout = ({children}) => {
                 {children}
             </div>
         </div>
+
     )
+
 }
 
 export default AuthLayout

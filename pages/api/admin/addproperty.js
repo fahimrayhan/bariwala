@@ -6,11 +6,11 @@ import {sql_query} from '../../../db/db.config'
 export default async function (req, res) {
 
     // Getting values from body
-    const {title,beds,desc,area,bath,month,floor,rent,type,pid} = req.body
+    const { title, beds, desc, area, bath, month, floor, rent, type, bachelor, pid} = req.body
     
     const date = new Date().toLocaleDateString()
     // Getting cookies
-    const token = req.cookies["authToken"]
+    const token = req.cookies["token"]
     if (!token) {
         res.redirect("/login")
     }
@@ -22,17 +22,13 @@ export default async function (req, res) {
     }
     else{
         try {
+            console.log(verify)
             
             const results = await sql_query(
-                // OLD DB CODE
-                // `INSERT INTO apartments(ap_name, beds, rent_per_month, type, baths, date, description, from_month, nth_floor) 
-                // VALUES ("${title}","${beds}","${rent}","${type}","${bath}","${date}","${desc}","${month}","${floor}")`
-
                 // NEW DB CODE
-                `INSERT INTO apartments(title, beds, rent_per_month, type, area, baths, date, description, from_month, nth_floor, property_id, user_id) 
-                VALUES("${title}","${beds}","${rent}","${type}","${area}", "${bath}","${date}","${desc}","${month}","${floor}", "${pid}","${verify.user_id}")`
+                `INSERT INTO apartments(title, beds, rent_per_month, type, area, baths, date, description, from_month, nth_floor, property_id, user_id, for_bachelor) 
+                VALUES("${title}","${beds}","${rent}","${type}","${area}", "${bath}","${date}","${desc}","${month}","${floor}", "${pid}","${verify.id}", "${bachelor}")`
             )
-            console.log(results)
             if (results) {
                 res.json({msg:"Success"})
             }
