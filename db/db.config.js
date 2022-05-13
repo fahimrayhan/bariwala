@@ -1,7 +1,6 @@
 import mysql from 'serverless-mysql'
 import 'dotenv/config'
 
-
 export const db = mysql({
     config:{
         host: "localhost",

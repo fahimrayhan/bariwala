@@ -35,7 +35,6 @@ export default async function handler(req, res) {
                 // Checking password matched or not
                 const isValidPass = await bcrypt.compare(pass, results[0].password)
 
-
                 if (isValidPass) {
                     // Token Generation
                     const token = jwt.sign({
@@ -44,6 +43,7 @@ export default async function handler(req, res) {
                         full_name: results[0].full_name,
                         role: results[0].role_id,
                         parent: results[0].parent_id
+                      
                     }, process.env.JWT_SEC, {
                         expiresIn: 60*60
                     })

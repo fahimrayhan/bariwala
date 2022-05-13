@@ -84,7 +84,8 @@ function NavBar() {
                       }
                   </div>
               </div>
-          </nav>
+        </nav>
+       
   )
 }
 
