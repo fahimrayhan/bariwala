@@ -65,10 +65,13 @@ function SideNav() {
                         <Link href="/"><a>Owners</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Payment History</a></Link>
+                        <Link href="/users/profile/payment"><a>Payment History</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/users"><a>Users</a></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/users/profile/complains"><a>Message</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/contact"><a>Contact Us</a></Link>
@@ -107,10 +110,13 @@ function SideNav() {
                         <Link href={`/profile/${auth.user.username}`}><a>Profile</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Payment History</a></Link>
+                        <Link href="/users/profile/payment"><a>Payment History</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/users"><a>Tenants</a></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/users/profile/complains"><a>Message</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/contact"><a>Contact Us</a></Link>
@@ -140,10 +146,10 @@ function SideNav() {
                         <Link href={`/users/rent/`}><a>Apartments</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Payment</a></Link>
+                        <Link href={`/users/profile/payment/${auth.user.id}`}><a>Payment</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/"><a>Complains</a></Link>
+                        <Link href="/users/profile/complains"><a>Message</a></Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/contact"><a>Contact Us</a></Link>
@@ -189,18 +195,23 @@ function SideNav() {
         )
     }
     return (
-        <div className="sidBar">
+        <div className="text-center text-white h-100">
 
-            <div className={Style.profile}>
-                <img src="/img_avatar.png" alt="User Avatar" className="avatar mb-2" />
-                <h3 className={Style.username}>
+            <div className="mb-3">
+                <img src="/img_avatar.png" alt="User Avatar" className="img-fluid rounded-circle w-50 mx-auto d-block mb-2"/>
+                <h3 className="">
                     {auth.user.full_name}
                 </h3>
-                <p className={Style.descriptions}>
+                <p className="">
                     {auth.user.desc}
                 </p>
             </div>
 
+            {/* <nav className={Style.navBar}>
+                {
+                    SideNavByRoles()
+                }
+            </nav> */}
             <nav className={Style.navBar}>
                 {
                     SideNavByRoles()

@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         try {
             // Checking user exist or not
             const results = await sql_query(
-                `SELECT user_id, user_name, role_id, parent_id, password FROM users  WHERE email ="${email}" `
+                `SELECT user_id, full_name, user_name, role_id, parent_id, password FROM users  WHERE email ="${email}" `
             )
             // If User exists
             if (results && results.length > 0) {
@@ -41,6 +41,7 @@ export default async function handler(req, res) {
                     const token = jwt.sign({
                         id: results[0].user_id,
                         username: results[0].user_name,
+                        full_name: results[0].full_name,
                         role: results[0].role_id,
                         parent: results[0].parent_id
                     }, process.env.JWT_SEC, {

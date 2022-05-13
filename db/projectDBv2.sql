@@ -175,7 +175,7 @@ CREATE TABLE payments
   amount NUMERIC(8,2) NOT NULL,
   date VARCHAR(20) NOT NULL,
   status BOOLEAN NULL DEFAULT '0',
-  transaction_id INT NOT NULL,
+  transaction_id VARCHAR(256) NOT NULL,
   paid_by INT NOT NULL,
   paid_to INT NOT NULL,
   lease_id INT NOT NULL,

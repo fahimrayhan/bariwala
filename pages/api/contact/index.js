@@ -4,6 +4,84 @@ import 'dotenv/config'
 
 export default async function (req, res) {
 
+    if (req.method == 'GET') {
+        // Getting cookies
+        const token = req.cookies["token"]
+        if (!token) {
+            res.redirect("/login")
+        }
+        // console.log(process.env.JWT_SEC)
+        const verify = jwt.verify(token, process.env.JWT_SEC);
+
+        if (!verify) {
+            res.redirect("/login")
+        }
+        else {
+            if (verify.role === 1) {
+                try {
+
+                    const results = await sql_query(
+                        `
+                            SELECT * FROM contacts
+                        `
+                    )
+                    if (results && results.length > 0) {
+                        res.json({results})
+                    }
+                    else {
+                        res.json({msg: "No contacts found"})
+                    }
+                    
+                } catch (error) {
+                    res.json({msg: error.message})
+                }
+            }
+            else if (verify.role === 2) {
+
+                try {
+
+                    const results = await sql_query(
+                        `
+                            SELECT * FROM contacts WHERE reciever_id = "${verify.id}"
+                        `
+                    )
+                    if (results && results.length > 0) {
+                        res.json({ results })
+                    }
+                    else {
+                        res.json({ msg: "No contacts found" })
+                    }
+
+                } catch (error) {
+                    res.json({ msg: error.message })
+                }
+
+            }
+            else if (verify.role === 3) {
+                try {
+
+                    const results = await sql_query(
+                        `
+                            SELECT * FROM contacts WHERE sender_name = "${verify.full_name}"
+                        `
+                    )
+                    if (results && results.length > 0) {
+                        res.json({ results })
+                    }
+                    else {
+                        res.json({ msg: "No contacts found" })
+                    }
+
+                } catch (error) {
+                    res.json({ msg: error.message })
+                }
+            }
+            else{
+                res.json({msg: "Access Restricted"})
+            }
+        }
+    }
+
     if (req.method === 'POST') {
 
         const { name, email, msg, parent, receiver } = req.body
@@ -85,6 +163,20 @@ export default async function (req, res) {
         // }
 
         
+    }
+
+    if (req.method == "PATCH") {
+        // Getting cookies
+        const token = req.cookies["token"]
+        if (!token) {
+            res.redirect("/login")
+        }
+        // console.log(process.env.JWT_SEC)
+        const verify = jwt.verify(token, process.env.JWT_SEC);
+
+        if (!verify) {
+            res.redirect("/login")
+        }
     }
 
 }
