@@ -3,15 +3,15 @@ import Style from '../styles/Nav.module.css'
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useContext} from 'react'
-import {DataContext} from '../store/GlobalState'
+import { useContext } from 'react'
+import { DataContext } from '../store/GlobalState'
 import Cookie from 'js-cookie'
 
 
 function SideNav() {
 
     const { state, dispatch } = useContext(DataContext)
-    const {auth} = state
+    const { auth } = state
 
     const router = useRouter()
 
@@ -27,18 +27,21 @@ function SideNav() {
             dispatch({
                 type: 'AUTH', payload: {}
             })
+            dispatch({
+                type: 'BALANCE', payload: {}
+            })
             if (res.status === 200) {
                 router.push('/')
             }
         }, 2000);
-        
+
     }
 
-    const SideNavByRoles = () =>{
+    const SideNavByRoles = () => {
 
         // Admin
         if (auth.user.role === 1) {
-            return(
+            return (
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
                         <Link href="/"><a>Home</a></Link>
@@ -86,7 +89,7 @@ function SideNav() {
         }
         // Owner
         if (auth.user.role === 2) {
-            return(
+            return (
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
                         <Link href="/"><a>Home</a></Link>
@@ -131,7 +134,7 @@ function SideNav() {
         }
         // Tenants
         if (auth.user.role === 3) {
-            return(
+            return (
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
                         <Link href="/"><a>Home</a></Link>
@@ -149,6 +152,9 @@ function SideNav() {
                         <Link href={`/users/profile/payment/${auth.user.id}`}><a>Payment</a></Link>
                     </li>
                     <li className="nav-item">
+                        <Link href={`/users/profile/payment`}><a>Payment History</a></Link>
+                    </li>
+                    <li className="nav-item">
                         <Link href="/users/profile/complains"><a>Message</a></Link>
                     </li>
                     <li className="nav-item">
@@ -164,7 +170,7 @@ function SideNav() {
         }
         // Subscriber
         if (auth.user.role === 4) {
-            return(
+            return (
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
                         <Link href="/"><a>Home</a></Link>
@@ -189,16 +195,16 @@ function SideNav() {
     }
 
     if (!auth.user) {
-        return(
+        return (
             <div>Loading</div>
-            
+
         )
     }
     return (
         <div className="text-center text-white h-100">
 
             <div className="mb-3">
-                <img src="/img_avatar.png" alt="User Avatar" className="img-fluid rounded-circle w-50 mx-auto d-block mb-2"/>
+                <img src="/img_avatar.png" alt="User Avatar" className="img-fluid rounded-circle w-50 mx-auto d-block mb-2" />
                 <h3 className="">
                     {auth.user.full_name}
                 </h3>

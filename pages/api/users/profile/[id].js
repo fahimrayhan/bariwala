@@ -55,25 +55,40 @@ export default async function (req, res) {
         const { id } = req.query
         console.log(id)
 
-        try {
+        // Getting cookies
+        const token = req.cookies["token"]
+        if (!token) {
+            res.redirect("/login")
+        }
+        // console.log(process.env.JWT_SEC)
+        const verify = jwt.verify(token, process.env.JWT_SEC);
 
-            const results = await sql_query(
-                
-                `SELECT full_name, email, phone_number, registration_date, is_authenticated,  birth_date, n_id, occupation, rent_status, dues, balance, bank_acc, tin_certificate, user_name, role_id FROM users WHERE user_id = '${id}'`
-                
-            )
-            // console.log(results)
-            if (results) {
-                res.json({data: results})
+        if (!verify) {
+            res.redirect("/login")
+        }
+
+        else{
+            try {
+
+                const results = await sql_query(
+
+                    `SELECT full_name, email, phone_number, registration_date, is_authenticated,  birth_date, n_id, occupation, rent_status, dues, balance, bank_acc, tin_certificate, user_name, role_id FROM users WHERE user_id = '${id}'`
+
+                )
+                // console.log(results)
+                if (results) {
+                    res.json({ data: results })
+                }
+                else {
+                    res.json({ msg: "No User Found!" })
+                }
+            } catch (error) {
+                res.json({ msg: error.message })
             }
-            else {
-                res.json({ msg: "Save Failed" })
-            }
-        } catch (error) {
-            res.json({ msg: error.message })
         }
     }
     if (req.method === "PUT") {
         
     }
 }
+

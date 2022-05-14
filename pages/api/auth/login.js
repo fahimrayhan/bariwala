@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         try {
             // Checking user exist or not
             const results = await sql_query(
-                `SELECT user_id, full_name, user_name, role_id, parent_id, password FROM users  WHERE email ="${email}" `
+                `SELECT * FROM users  WHERE email ="${email}" `
             )
             // If User exists
             if (results && results.length > 0) {
@@ -77,6 +77,17 @@ export default async function handler(req, res) {
                     res.status(200).json({
                         "token": token,
                         "refresh_token":refresh_token,
+                        "user": {
+                            id: results[0].user_id,
+                            full_name: results[0].full_name,
+                            username: results[0].user_name,
+                            email: results[0].email,
+                            role: results[0].role_id,
+                            parent: results[0].parent_id,
+                            occupation: results[0].occupation,
+                            desc: results[0].user_desc,
+                            balance: results[0].balance
+                        },
                         "msg": "Login Successfull"
                     })
                 }

@@ -7,6 +7,12 @@ const reducers = (state, action) =>{
                 ...state,
                 auth: action.payload
             };
+
+        case ACTIONS.BALANCE:
+            return{
+                ...state,
+                balance: action.payload
+            }
         default:
             return state
     }

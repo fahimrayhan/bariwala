@@ -1,121 +1,71 @@
 import AuthLayout from '../../components/AuthLayout'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useEffect, useState, useContext} from 'react'
+import { DataContext } from '../../store/GlobalState';
+import RentCards from '../../components/RentCards';
+
 
 function index({data}) {
 
-  const handleDelete = async (property) => {
-      const res = await fetch(`/api/properties/${property}`,{
-      method: 'DELETE'
+  const { state } = useContext(DataContext)
+  const { auth } = state
+
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    if (!auth) {
+      return
     }
+    else{
+      fetch(`/api/users/profile/`).then((response) =>{
+        response.json().then(data => {
+          setUser(data.data[0])
+          console.log(data.data[0])
+        })
+      })
+    }
+  }, [])
+  
+
+  if (!user) {
+    return(
+      <div>Loading...</div>
     )
-
-    const results = await res.json()
-    console.log(results)
-    toast(JSON.stringify(results.msg));
-    window.location.reload(false);
-
   }
-
- if (data.length > 0) {
-   return (
-     <div>
-       <h1>Dashboard</h1>
-       <div className="row p-5">
-         {
-           data.map((value, key) => {
-             return (
-               <div key={key} className="card m-2" style={{ width: "18rem" }}>
-                 <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvcGVydHl8ZW58MHx8MHx8&w=1000&q=80" className="card-img-top" alt="..." />
-                 <div className="card-body">
-                   <h5 className="card-title">{value.ap_name}</h5>
-                   <p className="card-text">{value.description.length > 50? value.description.substring(0, 50)+"..." : value.description}</p>
-                   <div className="row">
-                     <div className="col text-center">
-                       <p>
-                         Price: {value.rent_per_month}
-                       </p>
-                     </div>
-                     <div className="col text-center">
-                       <p>
-                         Type: {value.type}
-                       </p>
-                     </div>
-                     <div className="col text-center">
-                       <p>
-                         Available From: {value.from_month}
-                       </p>
-                     </div>
-                   </div>
-                   <div className="row">
-                     <div className="col text-center">
-                       <a href="#" className="btn btn-primary">Edit</a>
-                     </div>
-                     <div className="col text-center">
-                       <button type="button" className="btn btn-danger" onClick={() => handleDelete(value.apartment_id)}>Delete</button>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             )
-           })
-         }
-       </div>
-       <ToastContainer />
-     </div>
-   )
- }
-
- else{
-   return(
-     <>
-       <div className="row p-5">
-         <div className="card m-2" style={{ width: "18rem" }}>
-           <img src="https://www.indopropertyworld.com/Property/GetPropertyImage?imgPath=%2FAreas%2FMicro%2FTemplate%2FRadhe%20Ratnam%2Fgallery.jpg" className="card-img-top" alt="..." />
-           <div className="card-body">
-             <h5 className="card-title">No Property Found!</h5>
-             <p className="card-text">This is Demo Property</p>
-             <div className="row">
-               <div className="col text-center">
-                 <p>
-                   Price: 0
-                 </p>
-               </div>
-               <div className="col text-center">
-                 <p>
-                   Type: Demo
-                 </p>
-               </div>
-               <div className="col text-center">
-                 <p>
-                   Available From: 00/00/0000
-                 </p>
-               </div>
-             </div>
-             <div className="text-center">
-               <a href="#" className="btn btn-primary">No Details Available</a>
-             </div>
-           </div>
-         </div>
-       </div>
-     
-     </>
-   )
- }
-
+  else{
+    return(
+      <div className="userInfo mt-3">
+        <h3>Hello {user.full_name}</h3>
+        <p>Here is some information about your profile</p>
+        <div className="mt-3">
+          <div>Current Bank Balance: {
+            user.balance > 0 ? <span className="text-success">{user.balance}</span> : <span className="text-danger">{user.balance}</span>
+            }</div>
+            <div className="phone mt-2">
+              Phone Number: <span>{user.phone_number}</span>
+            </div>
+            <div className="phone mt-2">
+              Email: <span>{user.email}</span>
+            </div>
+        </div>
+      </div>
+    )
+  }
   
 }
 
 export default index
 
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`http://localhost:3000/api/properties`)
-  const data = await res.json()
+// export async function getServerSideProps(auth) {
+  
+//   // Fetch data from external API
+//   const res = await fetch(`http://localhost:3000/api/users/profile/${auth.user.id}`)
+//   const data = await res.json()
 
-  // Pass data to the page via props
-  return { props: { data } }
-}
+//   // Pass data to the page via props
+//   return { props: { data } }
+// }
 
 index.getLayout = function getLayout(page) {
   return(

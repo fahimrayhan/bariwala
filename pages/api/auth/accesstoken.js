@@ -52,7 +52,8 @@ export default async function (req, res) {
                             role: results[0].role_id,
                             parent: results[0].parent_id,
                             occupation: results[0].occupation,
-                            desc: results[0].user_desc
+                            desc: results[0].user_desc,
+                            balance: results[0].balance
                         }
                     })
                 }

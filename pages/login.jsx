@@ -33,6 +33,8 @@ function login() {
 
         const results = await res.json()
 
+        console.log(results)
+
         dispatch({type: 'AUTH', payload:{
             token : results.token,
             user: results.user
