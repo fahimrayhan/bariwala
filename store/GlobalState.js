@@ -4,8 +4,9 @@ export const DataContext = createContext()
 
 export const DataProvider = ({children}) => {
     
-    const initState = {auth: {}}
+    const initState = {auth: {}, balance:{}}
     const [state, dispatch] = useReducer(reducers, initState)
+    const {auth} = state
 
 
     useEffect(() => {
@@ -25,6 +26,9 @@ export const DataProvider = ({children}) => {
                                     user: data.user
                                 }
                             })
+
+                            dispatch({ type: 'BALANCE', payload: {balance: data.user.balance}})
+                            return
                         }
                     }
                 )
@@ -32,7 +36,12 @@ export const DataProvider = ({children}) => {
         }
     }, [])
     
+    const balance = (balance) => {
+        
+        const newBalance = auth.user.balance - balance;
+        dispatch({ type: 'BALANCE', payload: newBalance })
 
+    }
 
     return(
         <DataContext.Provider value={{ state, dispatch}}>

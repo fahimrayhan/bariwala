@@ -187,7 +187,7 @@ const Profile = () => {
                 <div className={Styles.profileInfo}>
                     <h2>Profile Info</h2>
                     <ul>
-                        <li>Current Balance: {data[0].balance > 0 ? data[0].balance:0}</li>
+                        <li>Current Balance: {data[0].balance > 0 ? <span className="text-success">{data[0].balance}</span> : <span className="text-danger">{data[0].balance}</span>}</li>
                         <li>Dues: {data[0].dues > 0 ? data[0].dues : 0}</li>
                         <li>Role: {roles[data[0].role_id]}</li>
                         <li>Registration Date: {data[0].registration_date}</li>

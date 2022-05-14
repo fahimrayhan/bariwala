@@ -1,4 +1,5 @@
 
 export const ACTIONS = {
-    AUTH:"AUTH"
+    AUTH:"AUTH",
+    BALANCE:"BALANCE"
 }

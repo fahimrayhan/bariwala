@@ -60,7 +60,7 @@ function NavBar() {
                               </Link>
                           </li>
                           <li className="nav-item">
-                                <Link href='/admin/add-apartment'>
+                                <Link href='/admin/apartments/add-new/'>
                                     <a className="nav-link">Add Apartment</a>
                                 </Link>
                           </li>
