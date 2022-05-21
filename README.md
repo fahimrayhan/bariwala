@@ -8,24 +8,36 @@ Bariwala aims to provide a smart solution for landlords to manage their properti
 ## Layout Images
 
 ### Dashboards
+<p align="center"> Admin, Owners, Tenants and Subscribers has separate dashboards </p>
 <div>
-  <div>
-    <p>Owner Dashboard</p>
-    <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/admin_dashboard.png' alt='Admin Dash' width="30%" >
-  </div>
- 
+  <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/admin_dashboard.png' alt='Admin Dash'/>
 </div>
 
 ### Pages
+<p align="center">HomePage</p>
+<div>
+   <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/homepage.png' alt='Admin Dash'/>
+</div>
 
 ### Property
+<p align="center">Property Desc and Property List Page</p>
+<div>
+   <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/property_desc.png' alt='Admin Dash' />
+  <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/apartments.png' alt='Admin Dash' />
+</div>
 
 ### Building
+<p align="center">Add Apartment Form</p>
+<div>
+ <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/add_apartment.png' alt='Admin Dash' />
+</div>
 
 ### Add User/Tenants
-
-### 
-
+<p align="center">User List and User Profile Edit</p>
+<div>
+  <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/users.png' alt='Admin Dash' />
+  <img src='https://github.com/fahimrayhan/bariwala/blob/main/public/ui/user_profile.png' alt='Admin Dash' />
+</div>
 
 ## Contributors
 Fahim Rayhan - Fullstack Developer <br>
